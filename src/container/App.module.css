@@ -1,0 +1,26 @@
+.App {
+  text-align: center;
+}
+
+.root {
+  display: 'flex',
+}
+
+.main-container {
+  padding: 10px;;
+  top: 56px;
+  left: 240px;
+  position: fixed;
+}
+
+@media(min-width: 600px) {
+  .main-container {
+    top: 64px !important;
+  }
+}
+
+@media(max-width: 599px) {
+  .main-container {
+    top: 56px !important;
+  }
+}
