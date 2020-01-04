@@ -4,12 +4,13 @@ import Header from '../components/header/Header';
 import Sidenav from '../components/sidenav/Sidenav';
 import AdmissionForm from '../components/admissionform/AdmissionForm'
 import FeeReceipt from '../components/feereceipt/FeeReceipt';
+import Dashboard from '../components/dashboard/Dashboard'
 
 export default class App extends Component {
   
   state = {
 
-    selectedSubMenu: "new-admission",
+    selectedSubMenu: "dashboard",
   };
 
   handleSubMenuClick = (subMenuId) => {
@@ -27,6 +28,7 @@ export default class App extends Component {
           <main className={classes['main-container']}>
             { this.state.selectedSubMenu === "new-admission" && <AdmissionForm/> }
             { this.state.selectedSubMenu === "fee-receipt" && <FeeReceipt/> }
+            { this.state.selectedSubMenu === "dashboard" && <Dashboard/> }
           </main>
         </div>
       );

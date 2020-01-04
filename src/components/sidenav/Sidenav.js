@@ -15,12 +15,20 @@ import ReceiptIcon from '@material-ui/icons/Receipt';
 import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import classes from './Sidenav.module.css'
 
 class Sidenav extends Component {
 
     state = {
         menus: [
+            {
+                title: "Dashboard",
+                id: "dashboard",
+                icon: <DashboardIcon/>,
+                submenus: [],
+                selected: true,
+            },
             {
                 title: "Addmission",
                 id: "admission",
@@ -30,7 +38,8 @@ class Sidenav extends Component {
                     {
                         title: "New Admission",
                         id: "new-admission",
-                        icon: <PersonAddIcon/>
+                        icon: <PersonAddIcon/>,
+                        selected: false,
                     }
                 ]
             },
@@ -43,7 +52,8 @@ class Sidenav extends Component {
                     {
                         title: "Fee Receipt",
                         id: "fee-receipt",
-                        icon: <ReceiptIcon/>
+                        icon: <ReceiptIcon/>,
+                        selected: false,
                     }
                 ]
             },
@@ -56,24 +66,51 @@ class Sidenav extends Component {
                     {
                         title: "Issue Book",
                         id: "issue-book",
-                        icon: <ArrowBackIcon/>
+                        icon: <ArrowBackIcon/>,
+                        selected: false,
                     },
                     {
                         title: "Return Book",
                         id: "return-book",
-                        icon: <ArrowForwardIcon/>
+                        icon: <ArrowForwardIcon/>,
+                        selected: false,
                     }
                 ]
             }
         ]
     };
 
-    handleMenuClick = (element) => {
+    handleMenuClick = (menuId) => {
+        console.log(menuId);
         let menus = [...this.state.menus];
-        let menuIndex = menus.findIndex(m => {return m.id === element});
-        let menu = menus[menuIndex];
-        menu.open = !menu.open;
-        this.setState({menus});
+        let menu = menus.find(m => {return m.id === menuId});
+        if (menu.selected !== undefined) {
+            this.resetSelectedMenus(menus);
+            menu.selected = true;
+            this.props.onSubMenuClick(menuId);
+        }
+        if (menu.open !== undefined) {
+            menu.open = !menu.open;
+        }
+        
+        this.setState({menus: menus});
+    }
+
+    handleSubMenuClick = (menuId, submenuId) => {
+        let menus = [...this.state.menus];
+        this.resetSelectedMenus(menus);
+        let menu = menus.find(m => {return m.id === menuId});
+        let submenu = menu.submenus.find(m => {return m.id === submenuId});
+        submenu.selected = true;
+        this.setState({menus: menus});
+        this.props.onSubMenuClick(submenuId);
+    }
+
+    resetSelectedMenus = (menus) =>{
+        menus.forEach(menu => {
+            if(menu.selected) {menu.selected = false;}
+            menu.submenus.forEach(submenu => { if(submenu.selected){submenu.selected = false;}});
+        });
     }
 
 
@@ -88,16 +125,21 @@ class Sidenav extends Component {
             >
                 {this.state.menus.map(menu => {
                     return(<List component="nav" key={menu.id}className="padding0px">
-                        <ListItem button onClick={() => this.handleMenuClick(menu.id)} >
+                        <ListItem 
+                            button 
+                            selected={menu.selected}
+                            onClick={() => this.handleMenuClick(menu.id)} >
                             <ListItemIcon>{menu.icon}</ListItemIcon>
                             <ListItemText primary={menu.title} />
-                            {menu.open ? <ExpandLess /> : <ExpandMore />}
+                            { menu.submenus.length > 0 && ( menu.open ? <ExpandLess /> : <ExpandMore />)}
                         </ListItem>
                         <Collapse in={menu.open} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
                             {menu.submenus.map(submenu => {
                                 return(
-                                    <ListItem button onClick={() => this.props.onSubMenuClick(submenu.id)}  className="paddingleft30px" key={submenu.id}>
+                                    <ListItem button
+                                        selected={submenu.selected} 
+                                        onClick={() => this.handleSubMenuClick(menu.id, submenu.id)}  className="paddingleft30px" key={submenu.id}>
                                         <ListItemIcon>{submenu.icon}</ListItemIcon>
                                         <ListItemText primary={submenu.title} />
                                     </ListItem>
