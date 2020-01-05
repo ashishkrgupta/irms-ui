@@ -27,13 +27,13 @@ export default class AdmissionForm extends Component {
                       <AccountCircle />
                     </Grid>
                     <Grid item>
-                      <TextField id="input-with-icon-grid" label="First Name" />
+                      <TextField label="First Name" />
                     </Grid>
                     <Grid item>
-                      <TextField id="input-with-icon-grid" label="Middle Name" />
+                      <TextField label="Middle Name" />
                     </Grid>
                     <Grid item>
-                      <TextField id="input-with-icon-grid" label="Last Name" />
+                      <TextField label="Last Name" />
                     </Grid>
                   </Grid>
                   <Divider className="margintop20px"/>

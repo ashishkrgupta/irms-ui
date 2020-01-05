@@ -26,7 +26,7 @@ export default class App extends Component {
           <Sidenav
           onSubMenuClick={this.handleSubMenuClick}/>
           
-          <Container className={classes['main-container']} maxWidth="l">
+          <Container className={classes['main-container']} maxWidth={false}>
             { this.state.selectedSubMenu === "new-admission" && <AdmissionForm/> }
             { this.state.selectedSubMenu === "fee-receipt" && <FeeReceipt/> }
             { this.state.selectedSubMenu === "dashboard" && <Dashboard/> }
