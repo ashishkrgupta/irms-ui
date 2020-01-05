@@ -15,7 +15,7 @@ export default class Header extends Component {
         return (
             <AppBar position="fixed">
                 <Toolbar>
-                    <Avatar alt="Remy Sharp" src="/GSS-logo.jpg" />
+                    <Avatar alt="GSS" src="/GSS-PNG.png" />
                     <Typography variant="h6" noWrap>
                         Gurukul Education Institute
                     </Typography>

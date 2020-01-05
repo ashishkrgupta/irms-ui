@@ -30,27 +30,14 @@ export default class AdmissionForm extends Component {
                       <TextField id="input-with-icon-grid" label="First Name" />
                     </Grid>
                     <Grid item>
-                      <AccountCircle />
-                    </Grid>
-                    <Grid item>
                       <TextField id="input-with-icon-grid" label="Middle Name" />
-                    </Grid>
-                    <Grid item>
-                      <AccountCircle />
                     </Grid>
                     <Grid item>
                       <TextField id="input-with-icon-grid" label="Last Name" />
                     </Grid>
                   </Grid>
                   <Divider className="margintop20px"/>
-                  <Grid container spacing={1} alignItems="flex-end">
-                    <Grid item>
-                      <AccountCircle />
-                    </Grid>
-                    <Grid item>
-                      <TextField id="input-with-icon-grid" label="With a grid" />
-                    </Grid>
-                  </Grid>
+                  
                 </form>
               </CardContent>
               <CardActions>
