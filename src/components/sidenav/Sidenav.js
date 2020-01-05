@@ -27,7 +27,7 @@ class Sidenav extends Component {
                 id: "dashboard",
                 icon: <DashboardIcon/>,
                 submenus: [],
-                selected: true,
+                selected: false,
             },
             {
                 title: "Addmission",
@@ -39,7 +39,7 @@ class Sidenav extends Component {
                         title: "New Admission",
                         id: "new-admission",
                         icon: <PersonAddIcon/>,
-                        selected: false,
+                        selected: true,
                     }
                 ]
             },

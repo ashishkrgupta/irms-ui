@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import classes from "./FeeReceipt.module.css"
+//import classes from "./FeeReceipt.module.css"
 
 export default class FeeReceipt extends Component {
 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Container from '@material-ui/core/Container';
 import classes from './App.module.css';
 import Header from '../components/header/Header';
 import Sidenav from '../components/sidenav/Sidenav';
@@ -10,7 +11,7 @@ export default class App extends Component {
   
   state = {
 
-    selectedSubMenu: "dashboard",
+    selectedSubMenu: "new-admission",
   };
 
   handleSubMenuClick = (subMenuId) => {
@@ -25,11 +26,11 @@ export default class App extends Component {
           <Sidenav
           onSubMenuClick={this.handleSubMenuClick}/>
           
-          <main className={classes['main-container']}>
+          <Container className={classes['main-container']} maxWidth="l">
             { this.state.selectedSubMenu === "new-admission" && <AdmissionForm/> }
             { this.state.selectedSubMenu === "fee-receipt" && <FeeReceipt/> }
             { this.state.selectedSubMenu === "dashboard" && <Dashboard/> }
-          </main>
+          </Container>
         </div>
       );
     }

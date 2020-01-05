@@ -6,6 +6,7 @@ import Badge from '@material-ui/core/Badge';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import Avatar from '@material-ui/core/Avatar';
 import classes from './Header.module.css'
 
 export default class Header extends Component {
@@ -14,6 +15,7 @@ export default class Header extends Component {
         return (
             <AppBar position="fixed">
                 <Toolbar>
+                    <Avatar alt="Remy Sharp" src="/GSS-logo.jpg" />
                     <Typography variant="h6" noWrap>
                         Gurukul Education Institute
                     </Typography>
