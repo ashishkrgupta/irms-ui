@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/irms-ui/static/css/main.c8098486.chunk.css",
-    "main.js": "/irms-ui/static/js/main.d24265f8.chunk.js",
-    "main.js.map": "/irms-ui/static/js/main.d24265f8.chunk.js.map",
+    "main.js": "/irms-ui/static/js/main.0b29bc7b.chunk.js",
+    "main.js.map": "/irms-ui/static/js/main.0b29bc7b.chunk.js.map",
     "runtime-main.js": "/irms-ui/static/js/runtime-main.b8791d0e.js",
     "runtime-main.js.map": "/irms-ui/static/js/runtime-main.b8791d0e.js.map",
-    "static/js/2.b27f74bf.chunk.js": "/irms-ui/static/js/2.b27f74bf.chunk.js",
-    "static/js/2.b27f74bf.chunk.js.map": "/irms-ui/static/js/2.b27f74bf.chunk.js.map",
+    "static/js/2.5a68355a.chunk.js": "/irms-ui/static/js/2.5a68355a.chunk.js",
+    "static/js/2.5a68355a.chunk.js.map": "/irms-ui/static/js/2.5a68355a.chunk.js.map",
     "index.html": "/irms-ui/index.html",
-    "precache-manifest.dd1be650b0a501a3d3797759caaade5b.js": "/irms-ui/precache-manifest.dd1be650b0a501a3d3797759caaade5b.js",
+    "precache-manifest.38c2f9c2bc6512a44c352de06cd53767.js": "/irms-ui/precache-manifest.38c2f9c2bc6512a44c352de06cd53767.js",
     "service-worker.js": "/irms-ui/service-worker.js",
     "static/css/main.c8098486.chunk.css.map": "/irms-ui/static/css/main.c8098486.chunk.css.map",
-    "static/js/2.b27f74bf.chunk.js.LICENSE": "/irms-ui/static/js/2.b27f74bf.chunk.js.LICENSE"
+    "static/js/2.5a68355a.chunk.js.LICENSE": "/irms-ui/static/js/2.5a68355a.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.b8791d0e.js",
-    "static/js/2.b27f74bf.chunk.js",
+    "static/js/2.5a68355a.chunk.js",
     "static/css/main.c8098486.chunk.css",
-    "static/js/main.d24265f8.chunk.js"
+    "static/js/main.0b29bc7b.chunk.js"
   ]
 }
