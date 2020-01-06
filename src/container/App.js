@@ -23,9 +23,7 @@ export default class App extends Component {
     return (
         <div className={classes.root}>
           <Header/>
-          <Sidenav
-          onSubMenuClick={this.handleSubMenuClick}/>
-          
+          <Sidenav onSubMenuClick={this.handleSubMenuClick}/>
           <Container className={classes['main-container']} maxWidth={false}>
             { this.state.selectedSubMenu === "new-admission" && <AdmissionForm/> }
             { this.state.selectedSubMenu === "fee-receipt" && <FeeReceipt/> }

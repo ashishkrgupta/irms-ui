@@ -16,9 +16,8 @@ export default class Header extends Component {
             <AppBar position="fixed">
                 <Toolbar>
                     <Avatar alt="GSS" src={require("../../static/images/GSS-PNG.png")} />
-                    <Typography variant="h6" noWrap>
-                        Gurukul Education Institute
-                    </Typography>
+                    <Typography variant="h6" noWrap>GURUKUL SHIKSHAN SANSTHAN</Typography>
+                    {/*<Typography variant="h8" noWrap> GOVT. APPROVED ENGLISH MEDIUM SCHOOL (CBSE BOARD)</Typography>*/}
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
                         <IconButton aria-label="show 4 new mails" color="inherit">
