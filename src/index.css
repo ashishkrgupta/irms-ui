@@ -23,3 +23,7 @@ code {
 .paddingleft30px {
   padding-left: 30px !important;
 }
+
+.width100percent {
+  width: 100%;
+}
