@@ -72,8 +72,9 @@ export default class AdmissionForm extends Component {
                     </FormControl>
                     </Grid>
                     <Grid item xs={8}>
-                      {/*<MuiPickersUtilsProvider utils = {DateFnsUtils}>
+                      <MuiPickersUtilsProvider utils = {DateFnsUtils}>
                         <KeyboardDatePicker
+                          disableToolbar
                           margin="normal"
                           id="date-picker-dialog"
                           label="Date picker dialog"
@@ -84,7 +85,7 @@ export default class AdmissionForm extends Component {
                             'aria-label': 'change date',
                           }}
                         />
-                        </MuiPickersUtilsProvider>*/}
+                        </MuiPickersUtilsProvider>
                     </Grid>
                     <Grid item xs={4}>
                       <TextField className="width100percent" label="Nationality" />
