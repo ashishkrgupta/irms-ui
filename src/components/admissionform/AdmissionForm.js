@@ -30,80 +30,196 @@ export default class AdmissionForm extends Component {
                 <Typography variant="h5" component="h2"> New Admission  </Typography>
                 <Typography className={classes.pos} color="textSecondary">Enter details for the new admission </Typography>
                 <form className={classes.root} noValidate autoComplete="off">
-                  <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    
-                    <Grid item xs={4}>
-                      
-                    <AccountCircle /><TextField className="width100percent" label="First Name" />
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Middle Name" />
-                    </Grid>
-                    <Grid item xs={8}>
-                      <TextField className="width100percent" label="Last Name" />
-                    </Grid>
-                    <Grid item xs={4}>
-                      <Card className={classes['profile-pic']}>
-                      <CardContent>
-                      <CardMedia
-                        className={classes['profile-pic']}
-                        image="./placeholder.png"
-                        title="Live from space album cover"
-                      />
-                      </CardContent>
-                      </Card>
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Blood Group" />
-                    </Grid>
-                    <Grid item xs={4}>
-                    <FormControl className={classes.formControl}>
-                      <InputLabel id="demo-simple-select-label">Gender</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={''}
-                        //onChange={handleChange}
-                      >
-                        <MenuItem value={''}>Select</MenuItem>
-                        <MenuItem value={'male'}>Male</MenuItem>
-                        <MenuItem value={'female'}>Female</MenuItem>
-                      </Select>
-                    </FormControl>
-                    </Grid>
-                    <Grid item xs={8}>
-                      <MuiPickersUtilsProvider utils = {DateFnsUtils}>
-                        <KeyboardDatePicker
-                          disableToolbar
-                          margin="normal"
-                          id="date-picker-dialog"
-                          label="Date picker dialog"
-                          format="MM/dd/yyyy"
-                          value={new Date()}
-                          //onChange={handleDateChange}
-                          KeyboardButtonProps={{
-                            'aria-label': 'change date',
-                          }}
-                        />
-                        </MuiPickersUtilsProvider>
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Nationality" />
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Relegion" />
-                    </Grid>
-                    <Grid item xs={8}>
-                      <TextField className="width100percent" label="Community" />
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Aadhar No" />
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Language Known" />
-                    </Grid>
-                  </Grid>
+                <Card >
+                  <CardContent>
+                  <Typography variant="h5" component="h2">A. Student Information  </Typography>
+                      <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
+                            <Grid item xs={3}>
+                              <TextField className="width100percent" label="First Name" />
+                            </Grid>
+                            <Grid item xs={3}>
+                              <TextField className="width100percent" label="Middle Name" />
+                            </Grid>
+                            <Grid item xs={3}>
+                              <TextField className="width100percent" label="Last Name" />
+                            </Grid>
+                            <Grid item xs={3}>
+                              <Card className={classes['profile-pic']}>
+                              <CardContent>
+                                <CardMedia
+                                  className={classes['profile-pic']}
+                                  image="./placeholder.png"
+                                  title="Live from space album cover"
+                                />
+                              </CardContent>
+                              </Card>
+                            </Grid>
+                            <Grid item xs={3}>
+                              <FormControl className={ "width100percent " + classes.formControl}>
+                                <InputLabel id="demo-simple-select-label">Blood Group</InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="blood-group"
+                                  value={''}
+                                  //onChange={handleChange}
+                                >
+                                  <MenuItem value={''}>Select</MenuItem>
+                                  <MenuItem value={'a+'}>A+ve</MenuItem>
+                                  <MenuItem value={'a-'}>A-ve</MenuItem>
+                                  <MenuItem value={'b+'}>B+ve</MenuItem>
+                                  <MenuItem value={'b-'}>B-ve</MenuItem>
+                                  <MenuItem value={'o+'}>O+ve</MenuItem>
+                                  <MenuItem value={'o-'}>O-ve</MenuItem>
+                                  <MenuItem value={'ab+'}>AB+ve</MenuItem>
+                                  <MenuItem value={'ab-'}>AB-ve</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </Grid>
+                            <Grid item xs={3}>
+                              <FormControl className={ "width100percent " + classes.formControl}>
+                                <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  value={''}
+                                  //onChange={handleChange}
+                                >
+                                  <MenuItem value={''}>Select</MenuItem>
+                                  <MenuItem value={'male'}>Male</MenuItem>
+                                  <MenuItem value={'female'}>Female</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </Grid>
+                            <Grid item xs={3}>
+                              <MuiPickersUtilsProvider utils = {DateFnsUtils}>
+                                <KeyboardDatePicker
+                                  disableToolbar
+                                  margin="normal"
+                                  id="date-picker-dialog"
+                                  label="Date picker dialog"
+                                  format="MM/dd/yyyy"
+                                  value={new Date()}
+                                  //onChange={handleDateChange}
+                                  KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                  }}
+                                />
+                                </MuiPickersUtilsProvider>
+                            </Grid>
+                            <Grid item xs={3}>
+                              <TextField className="width100percent" label="Nationality" />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <TextField className="width100percent" label="Relegion" />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <TextField className="width100percent" label="Community" />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <TextField className="width100percent" label="Aadhar No" />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <TextField className="width100percent" label="Language Known" />
+                            </Grid>
+                      </Grid>
+                    </CardContent>
+                  </Card>
                   <Divider className="margintop20px"/>
+                  <Card>
+
+                  <CardContent>
+                  <Typography variant="h5" component="h2">B. Parents/Guardian Information</Typography>
+                      <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
+                            <Grid item xs={3}>
+                              <TextField className="width100percent" label="First Name" />
+                            </Grid>
+                            <Grid item xs={3}>
+                              <TextField className="width100percent" label="Middle Name" />
+                            </Grid>
+                            <Grid item xs={3}>
+                              <TextField className="width100percent" label="Last Name" />
+                            </Grid>
+                            <Grid item xs={3}>
+                              <Card className={classes['profile-pic']}>
+                              <CardContent>
+                                <CardMedia
+                                  className={classes['profile-pic']}
+                                  image="./placeholder.png"
+                                  title="Live from space album cover"
+                                />
+                              </CardContent>
+                              </Card>
+                            </Grid>
+                            <Grid item xs={3}>
+                              <FormControl className={ "width100percent " + classes.formControl}>
+                                <InputLabel id="demo-simple-select-label">Blood Group</InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="blood-group"
+                                  value={''}
+                                  //onChange={handleChange}
+                                >
+                                  <MenuItem value={''}>Select</MenuItem>
+                                  <MenuItem value={'a+'}>A+ve</MenuItem>
+                                  <MenuItem value={'a-'}>A-ve</MenuItem>
+                                  <MenuItem value={'b+'}>B+ve</MenuItem>
+                                  <MenuItem value={'b-'}>B-ve</MenuItem>
+                                  <MenuItem value={'o+'}>O+ve</MenuItem>
+                                  <MenuItem value={'o-'}>O-ve</MenuItem>
+                                  <MenuItem value={'ab+'}>AB+ve</MenuItem>
+                                  <MenuItem value={'ab-'}>AB-ve</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </Grid>
+                            <Grid item xs={3}>
+                              <FormControl className={ "width100percent " + classes.formControl}>
+                                <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                                <Select
+                                  labelId="demo-simple-select-label"
+                                  id="demo-simple-select"
+                                  value={''}
+                                  //onChange={handleChange}
+                                >
+                                  <MenuItem value={''}>Select</MenuItem>
+                                  <MenuItem value={'male'}>Male</MenuItem>
+                                  <MenuItem value={'female'}>Female</MenuItem>
+                                </Select>
+                              </FormControl>
+                            </Grid>
+                            <Grid item xs={3}>
+                              <MuiPickersUtilsProvider utils = {DateFnsUtils}>
+                                <KeyboardDatePicker
+                                  disableToolbar
+                                  margin="normal"
+                                  id="date-picker-dialog"
+                                  label="Date picker dialog"
+                                  format="MM/dd/yyyy"
+                                  value={new Date()}
+                                  //onChange={handleDateChange}
+                                  KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                  }}
+                                />
+                                </MuiPickersUtilsProvider>
+                            </Grid>
+                            <Grid item xs={3}>
+                              <TextField className="width100percent" label="Nationality" />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <TextField className="width100percent" label="Relegion" />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <TextField className="width100percent" label="Community" />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <TextField className="width100percent" label="Aadhar No" />
+                            </Grid>
+                            <Grid item xs={4}>
+                              <TextField className="width100percent" label="Language Known" />
+                            </Grid>
+                      </Grid>
+                    </CardContent>
+                  </Card>
                   
                 </form>
               </CardContent>
