@@ -12,6 +12,18 @@ code {
     monospace;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  }
+
+::-webkit-scrollbar-track {
+  background: #f1f1f100;
+  }
+
+::-webkit-scrollbar-thumb {
+  background: #3f51b5;
+  }
+
 .margintop20px{
   margin-top: 20px !important;
 }
