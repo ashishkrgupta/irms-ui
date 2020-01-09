@@ -12,16 +12,22 @@
   top: 56px;
   left: 240px;
   position: fixed;
+  overflow-y: auto;
+  height:calc(100% - 56px);
 }
 
 @media(min-width: 600px) {
   .main-container {
     top: 64px !important;
+    overflow-y: auto;
+    height:calc(100% - 64px);
   }
 }
 
 @media(max-width: 599px) {
   .main-container {
     top: 56px !important;
+    overflow-y: auto;
+    height:calc(100% - 56px);
   }
 }
