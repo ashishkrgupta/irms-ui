@@ -221,6 +221,33 @@ export default class AdmissionForm extends Component {
                       <TextField className="width100percent" label="Relation with Student" />
                     </Grid>
                   </Grid>
+                  <Typography variant="h5" component="h2"  className="margintop20px">C. Enclosure  </Typography>
+                  <Divider />
+                  <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
+                    <Grid item xs={8}>
+                      <FormControl className={ "width100percent " + classes.formControl}>
+                          <InputLabel id="demo-simple-select-label">Document Type</InputLabel>
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="blood-group"
+                            value={''}
+                            //onChange={handleChange}
+                          >
+                            <MenuItem value={''}>Select</MenuItem>
+                            <MenuItem value={'a+'}>Birth Certificate</MenuItem>
+                            <MenuItem value={'a-'}>Original copy of Transfer Certificate</MenuItem>
+                            <MenuItem value={'b+'}>Passport sixe photograph of parent.</MenuItem>
+                            <MenuItem value={'b-'}>Photo copy of Aadhar</MenuItem>
+                          </Select>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <Button variant="contained" color="primary">Upload</Button>
+                    </Grid>
+                    <Grid item xs={2}>
+                      <Button variant="contained" color="primary">Add More</Button>
+                    </Grid>
+                  </Grid>
                 </form>
               </CardContent>
               <CardActions>
