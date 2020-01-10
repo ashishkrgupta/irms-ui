@@ -199,6 +199,28 @@ export default class AdmissionForm extends Component {
                       <TextField className="width100percent" label="Pin Code" />
                     </Grid>
                   </Grid>
+                  <Typography className={"margintop20px " }>Emergency Contact</Typography>
+                  <Divider className={classes.width25percent}/>
+                  <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
+                    <Grid item xs={4}>
+                      <TextField className="width100percent" label="Contact Number" />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <TextField className="width100percent" label="Name of Contact Person" />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <TextField className="width100percent" label="Relation with Student" />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <TextField className="width100percent" label="Contact Number" />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <TextField className="width100percent" label="Name of Contact Person" />
+                    </Grid>
+                    <Grid item xs={4}>
+                      <TextField className="width100percent" label="Relation with Student" />
+                    </Grid>
+                  </Grid>
                 </form>
               </CardContent>
               <CardActions>
