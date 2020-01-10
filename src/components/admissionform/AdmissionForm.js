@@ -155,7 +155,50 @@ export default class AdmissionForm extends Component {
                       <TextField className="width100percent" label="Email Address" />
                     </Grid>
                   </Grid>
-                  
+                  <Typography className={"margintop20px " }>Residential Address</Typography>
+                  <Divider className={classes.width25percent}/>
+                  <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
+                    <Grid item xs={6}>
+                      <TextField className="width100percent" label="Address Line 1" />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <TextField className="width100percent" label="Address Line 2" />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <TextField className="width100percent" label="City" />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <TextField className="width100percent" label="State/Provience" />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <TextField className="width100percent" label="Country" />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <TextField className="width100percent" label="Pin Code" />
+                    </Grid>
+                  </Grid>
+                  <Typography className={"margintop20px " }>Correspondence Address</Typography>
+                  <Divider className={classes.width25percent}/>
+                  <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
+                    <Grid item xs={6}>
+                      <TextField className="width100percent" label="Address Line 1" />
+                    </Grid>
+                    <Grid item xs={6}>
+                      <TextField className="width100percent" label="Address Line 2" />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <TextField className="width100percent" label="City" />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <TextField className="width100percent" label="State/Provience" />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <TextField className="width100percent" label="Country" />
+                    </Grid>
+                    <Grid item xs={3}>
+                      <TextField className="width100percent" label="Pin Code" />
+                    </Grid>
+                  </Grid>
                 </form>
               </CardContent>
               <CardActions>
