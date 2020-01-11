@@ -22,6 +22,30 @@ import {
 import classes from "./AdmissionForm.module.css"
 
 export default class AdmissionForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      student: {
+        documents:[{
+          documentType:"",
+          filename:""
+        }]
+      }
+    }
+  }
+
+  addDocumentRow = () => {
+    let student = {...this.state.student};
+    student.documents.push({documentType:"birthSertificate",filename:"" });
+    this.setState({student});
+  }
+
+  removeDocumentRow = (index) => {
+    let student = {...this.state.student};
+    if (student.documents.length > 1)
+      student.documents.splice(index, 1);
+    this.setState({student});
+  }
 
   render() {
     return (<Card>
@@ -224,29 +248,31 @@ export default class AdmissionForm extends Component {
                   <Typography variant="h5" component="h2"  className="margintop20px">C. Enclosure  </Typography>
                   <Divider />
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    <Grid item xs={8}>
-                      <FormControl className={ "width100percent " + classes.formControl}>
-                          <InputLabel id="demo-simple-select-label">Document Type</InputLabel>
-                          <Select
-                            labelId="demo-simple-select-label"
-                            id="blood-group"
-                            value={''}
-                            //onChange={handleChange}
-                          >
-                            <MenuItem value={''}>Select</MenuItem>
-                            <MenuItem value={'a+'}>Birth Certificate</MenuItem>
-                            <MenuItem value={'a-'}>Original copy of Transfer Certificate</MenuItem>
-                            <MenuItem value={'b+'}>Passport sixe photograph of parent.</MenuItem>
-                            <MenuItem value={'b-'}>Photo copy of Aadhar</MenuItem>
-                          </Select>
-                        </FormControl>
-                    </Grid>
-                    <Grid item xs={2}>
-                      <Button variant="contained" color="primary">Upload</Button>
-                    </Grid>
-                    <Grid item xs={2}>
-                      <Button variant="contained" color="primary">Add More</Button>
-                    </Grid>
+                    { this.state.student.documents.map((doc, index) => {
+                        return[<Grid item xs={8} key = {"doc_" + index}>
+                        <FormControl className={ "width100percent " + classes.formControl}>
+                            <InputLabel >Document Type</InputLabel>
+                            <Select
+                              labelId="demo-simple-select-label"
+                              id="blood-group"
+                              value={doc.documentType}
+                              //onChange={handleChange}
+                            >
+                              <MenuItem value={''}>Select</MenuItem>
+                              <MenuItem value={'birthSertificate'}>Birth Certificate</MenuItem>
+                              <MenuItem value={'transferCertificate'}>Original copy of Transfer Certificate</MenuItem>
+                              <MenuItem value={'parentsPgoto'}>Passport sixe photograph of parent.</MenuItem>
+                              <MenuItem value={'aadhar'}>Photo copy of Aadhar</MenuItem>
+                            </Select>
+                          </FormControl>
+                      </Grid>,
+                      <Grid item xs={4} key = {"doc_ctrl_" + index}>
+                        <Button variant="contained" color="primary">File</Button>
+                        <Button variant="contained" color="primary" onClick={this.addDocumentRow}>Add</Button>
+                        <Button variant="contained" color="secondary" onClick={ () => this.removeDocumentRow(index)}>Remove</Button>
+                      </Grid>];
+                    } )}
+                    
                   </Grid>
                 </form>
               </CardContent>
