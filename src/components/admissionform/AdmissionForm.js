@@ -38,7 +38,18 @@ export default class AdmissionForm extends Component {
         documents:[{
           documentType:"",
           filename:""
-        }]
+        }],
+        emergencyContacts:[{
+            contactNumber:"",
+            personName:"",
+            relationWithStudent:""
+          },
+          {
+            contactNumber:"",
+            personName:"",
+            relationWithStudent:""
+          }
+        ]
       }
     }
   }
@@ -78,7 +89,6 @@ export default class AdmissionForm extends Component {
           currObj[element] = event.target.value;
         }
       });
-
     } else {
       student[key] = event.target.value;
     }
@@ -94,6 +104,12 @@ export default class AdmissionForm extends Component {
   onDOBChange = (date, dateStr) => {
     let student = {...this.state.student};
     student.dateOfBirth = dateStr;
+    this.setState({student});
+  }
+
+  updateEmergencyContact = (event) => {
+    let student = {...this.state.student};
+    student.emergencyContacts[event.target.attributes.index.value][event.target.attributes.field.value] = event.target.value;
     this.setState({student});
   }
 
@@ -307,29 +323,21 @@ export default class AdmissionForm extends Component {
                   <Typography className={"margintop20px " }>Emergency Contact</Typography>
                   <Divider className={classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Contact Number" />
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Name of Contact Person" />
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Relation with Student" />
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Contact Number" />
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Name of Contact Person" />
-                    </Grid>
-                    <Grid item xs={4}>
-                      <TextField className="width100percent" label="Relation with Student" />
-                    </Grid>
+                    {this.state.student.emergencyContacts.map((contact, i) => {
+                      return [<Grid item xs={4}>
+                        <TextField className="width100percent" inputProps={{ onChange:this.updateEmergencyContact, index:i, field: "contactNumber"}} label="Contact Number" />
+                      </Grid>,
+                      <Grid item xs={4}>
+                        <TextField className="width100percent" inputProps={{ onChange:this.updateEmergencyContact, index:i, field: "personName"}}  value={contact.personName} label="Name of Contact Person" />
+                      </Grid>,
+                      <Grid item xs={4}>
+                        <TextField className="width100percent" inputProps={{ onChange:this.updateEmergencyContact, index:i, field: "relationWithStudent"}}  value={contact.relationWithStudent} label="Relation with Student" />
+                      </Grid>];
+                    })}
                   </Grid>
                   <Typography variant="h5" component="h2"  className="margintop20px">C. Enclosure  </Typography>
                   <Divider />
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    
                     { this.state.student.documents.map((doc, index) => {
                         return[<Grid item xs={1} key = {"doc_ctrl_" + index} style={{paddingTop: "14px"}} >
                           {index === 0 && <AddCircleIcon style={{ fontSize: 35, cursor: "pointer"  }} onClick={this.addDocumentRow}/>}
