@@ -112,9 +112,12 @@ export default class AdmissionForm extends Component {
     student.emergencyContacts[event.target.attributes.index.value][event.target.attributes.field.value] = event.target.value;
     this.setState({student});
   }
+   saveData = () => {
+    alert(JSON.stringify(this.state.student));
+   }
 
   componentDidUpdate = () => {
-    console.log(this.state.student);
+    //console.log(this.state.student);
   }
 
   render() {
@@ -324,13 +327,13 @@ export default class AdmissionForm extends Component {
                   <Divider className={classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     {this.state.student.emergencyContacts.map((contact, i) => {
-                      return [<Grid item xs={4}>
+                      return [<Grid item xs={4} key={"0" + i}>
                         <TextField className="width100percent" inputProps={{ onChange:this.updateEmergencyContact, index:i, field: "contactNumber"}} label="Contact Number" />
                       </Grid>,
-                      <Grid item xs={4}>
+                      <Grid item xs={4} key={"1" + i}>
                         <TextField className="width100percent" inputProps={{ onChange:this.updateEmergencyContact, index:i, field: "personName"}}  value={contact.personName} label="Name of Contact Person" />
                       </Grid>,
-                      <Grid item xs={4}>
+                      <Grid item xs={4} key={"2" + i}>
                         <TextField className="width100percent" inputProps={{ onChange:this.updateEmergencyContact, index:i, field: "relationWithStudent"}}  value={contact.relationWithStudent} label="Relation with Student" />
                       </Grid>];
                     })}
@@ -368,7 +371,7 @@ export default class AdmissionForm extends Component {
                 </form>
               </CardContent>
               <CardActions>
-                <Button variant="contained" color="primary">Save</Button>
+                <Button variant="contained" onClick={this.saveData} color="primary">Save</Button>
                 <Button variant="contained" color="secondary">Cancel</Button>
               </CardActions>
             </Card>);
