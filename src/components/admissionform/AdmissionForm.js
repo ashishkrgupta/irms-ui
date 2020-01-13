@@ -184,12 +184,14 @@ export default class AdmissionForm extends Component {
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                           <KeyboardDatePicker
                             className="width100percent"
-                            disableToolbar
                             disableFuture
                             margin="normal"
                             label="Date of Birth"
                             format="dd/MM/yyyy"
-                            inputValue={'15/01/2010'}
+                            openTo="date"
+                            views={["year", "month", "date"]}
+                            //inputValue={'15/01/2010'}
+                            inputValue={this.state.student.dateOfBirth }
                             onChange={this.onDOBChange}
                           />
                           </MuiPickersUtilsProvider>
