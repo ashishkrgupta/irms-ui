@@ -1,0 +1,1 @@
+import {STUDENTS_URL} from '../config';

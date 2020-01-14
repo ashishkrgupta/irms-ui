@@ -23,6 +23,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import classes from "./AdmissionForm.module.css"
+import { STUDENTS_URL } from "../../config";
 
 export default class AdmissionForm extends Component {
   constructor(props) {
@@ -112,7 +113,13 @@ export default class AdmissionForm extends Component {
     student.emergencyContacts[event.target.attributes.index.value][event.target.attributes.field.value] = event.target.value;
     this.setState({student});
   }
-   saveData = () => {
+   saveData = async () => {
+    const response = await fetch(STUDENTS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(this.state.student),
+    })
+    console.log(await response.json())
     alert(JSON.stringify(this.state.student));
    }
 
@@ -190,7 +197,6 @@ export default class AdmissionForm extends Component {
                             format="dd/MM/yyyy"
                             openTo="date"
                             views={["year", "month", "date"]}
-                            //inputValue={'15/01/2010'}
                             inputValue={this.state.student.dateOfBirth }
                             onChange={this.onDOBChange}
                           />
