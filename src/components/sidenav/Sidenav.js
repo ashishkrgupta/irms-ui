@@ -30,13 +30,20 @@ class Sidenav extends Component {
                 selected: false,
             },
             {
-                title: "Addmission",
+                title: "Students 
+",
                 id: "admission",
                 icon: <AccountBox/>,
                 open: false,
                 submenus: [
                     {
                         title: "New Admission",
+                        id: "new-admission",
+                        icon: <PersonAddIcon/>,
+                        selected: true,
+                    },
+                    {
+                        title: "Student List",
                         id: "new-admission",
                         icon: <PersonAddIcon/>,
                         selected: true,
