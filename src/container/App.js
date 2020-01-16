@@ -6,6 +6,7 @@ import Sidenav from '../components/sidenav/Sidenav';
 import AdmissionForm from '../components/admissionform/AdmissionForm'
 import FeeReceipt from '../components/feereceipt/FeeReceipt';
 import Dashboard from '../components/dashboard/Dashboard'
+import StudentDetails from '../components/admissionform/StudentDetails'
 
 export default class App extends Component {
   
@@ -28,6 +29,7 @@ export default class App extends Component {
             { this.state.selectedSubMenu === "new-admission" && <AdmissionForm/> }
             { this.state.selectedSubMenu === "fee-receipt" && <FeeReceipt/> }
             { this.state.selectedSubMenu === "dashboard" && <Dashboard/> }
+            { this.state.selectedSubMenu === "issue-book" && <StudentDetails/> }
           </Container>
         </div>
       );

@@ -119,8 +119,8 @@ export default class AdmissionForm extends Component {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this.state.student),
     })
-    console.log(await response.json())
-    alert(JSON.stringify(this.state.student));
+    //console.log(await response.json())
+    alert(response);
    }
 
   componentDidUpdate = () => {
