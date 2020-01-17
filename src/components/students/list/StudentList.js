@@ -41,14 +41,14 @@ export default class StudentList extends Component {
     }
   };
 
-  onChangeSearhBar = (event) => {
-    console.log(event.target.value);
+  onChangeSearhBar = (option) => {
+    console.log(option);
   }
 
   render = () => {
     return (<Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
       <StudentSearchBar
-        onChane={this.onChangeSearhBar}
+        onChange={this.onChangeSearhBar}
       />
       {this.renderContainer()}
     </Grid>);

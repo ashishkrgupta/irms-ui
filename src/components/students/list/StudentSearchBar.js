@@ -9,8 +9,33 @@ import classes from "../AdmissionForm.module.css"
 
 export default class StudentSearchBar extends Component {
 
-  onChange = (event) => {
-    this.props.onChange(event);
+  state = {
+    selectedOption: {
+      class:'',
+      section:'',
+      rollNo: ''
+    }
+  }
+
+  onChangeClass = (event) => {
+    let selectedOption = {...this.state.selectedOption};
+    selectedOption.class = event.target.value;
+    this.setState({selectedOption})
+    this.props.onChange(selectedOption);
+  }
+
+  onChangeSection = (event) => {
+    let selectedOption = {...this.state.selectedOption};
+    selectedOption.section = event.target.value;
+    this.setState({selectedOption})
+    this.props.onChange(selectedOption);
+  }
+
+  onChangeRollNo = (event) => {
+    let selectedOption = {...this.state.selectedOption};
+    selectedOption.rollNo = event.target.value;
+    this.setState({selectedOption})
+    this.props.onChange(selectedOption);
   }
 
   render = () => {
@@ -21,8 +46,8 @@ export default class StudentSearchBar extends Component {
             <InputLabel id="class-select">Class</InputLabel>
             <Select
               labelId="class-select"
-              value={''}
-              onChange={this.conChange}
+              value={this.state.selectedOption.class}
+              onChange={this.onChangeClass}
             >
               <MenuItem value={''} >Select</MenuItem>
               <MenuItem value={'1'} >Class 1st</MenuItem>
@@ -37,11 +62,13 @@ export default class StudentSearchBar extends Component {
             <InputLabel id="section-select">Section</InputLabel>
             <Select
               labelId="section-select"
-              value={''}
-              onChange={this.conChange}
+              value={this.state.selectedOption.section}
+              onChange={this.onChangeSection}
             >
               <MenuItem value={''} >Select</MenuItem>
-              <MenuItem value={'a+'} >A+ve</MenuItem>
+              <MenuItem value={'a'} >Section A</MenuItem>
+              <MenuItem value={'b'} >Section B</MenuItem>
+              <MenuItem value={'c'} >Section C</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -50,8 +77,8 @@ export default class StudentSearchBar extends Component {
             <InputLabel id="roll-no-select">Roll No</InputLabel>
             <Select
               labelId="roll-no-select"
-              value={''}
-              onChange={this.conChange}
+              value={this.state.selectedOption.rollNo}
+              onChange={this.onChangeRollNo}
             >
               <MenuItem value={''} >Select</MenuItem>
               <MenuItem value={'a+'} >A+ve</MenuItem>
