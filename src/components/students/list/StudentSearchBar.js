@@ -5,6 +5,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 import classes from "../AdmissionForm.module.css"
 
 export default class StudentSearchBar extends Component {
@@ -17,25 +18,30 @@ export default class StudentSearchBar extends Component {
     }
   }
 
+  componentDidUpdate = () => {
+    this.props.onChange && this.props.onChange(this.state.selectedOption);
+  }
+
   onChangeClass = (event) => {
     let selectedOption = {...this.state.selectedOption};
     selectedOption.class = event.target.value;
     this.setState({selectedOption})
-    this.props.onChange(selectedOption);
   }
 
   onChangeSection = (event) => {
     let selectedOption = {...this.state.selectedOption};
     selectedOption.section = event.target.value;
     this.setState({selectedOption})
-    this.props.onChange(selectedOption);
   }
 
   onChangeRollNo = (event) => {
     let selectedOption = {...this.state.selectedOption};
     selectedOption.rollNo = event.target.value;
     this.setState({selectedOption})
-    this.props.onChange(selectedOption);
+  }
+
+  onSearchClick = () => {
+    this.props.onSearchClick && this.props.onSearchClick(this.state.selectedOption);
   }
 
   render = () => {
@@ -85,7 +91,9 @@ export default class StudentSearchBar extends Component {
             </Select>
           </FormControl>
         </Grid>
-      
+        {this.props.onSearchClick && (<Grid item xs={2} style= {{margin: "0px 5px"}}>
+          <Button variant="contained" onClick={this.onSearchClick} color="primary">Search</Button>
+        </Grid>)}
       </Grid>
       <Divider className="margintop10px"/>
     </Grid>);

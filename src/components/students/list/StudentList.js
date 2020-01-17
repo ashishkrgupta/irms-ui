@@ -48,7 +48,8 @@ export default class StudentList extends Component {
   render = () => {
     return (<Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
       <StudentSearchBar
-        onChange={this.onChangeSearhBar}
+        //onChange={this.onChangeSearhBar}
+        onSearchClick={this.onChangeSearhBar}
       />
       {this.renderContainer()}
     </Grid>);
