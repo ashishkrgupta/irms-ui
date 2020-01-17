@@ -41,9 +41,15 @@ export default class StudentList extends Component {
     }
   };
 
+  onChangeSearhBar = (event) => {
+    console.log(event.target.value);
+  }
+
   render = () => {
     return (<Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-      <StudentSearchBar/>
+      <StudentSearchBar
+        onChane={this.onChangeSearhBar}
+      />
       {this.renderContainer()}
     </Grid>);
   }
@@ -76,10 +82,16 @@ export default class StudentList extends Component {
       <CardContent>
         <Typography variant="h5"  color="textSecondary">{student.firstName + " " + student.middleName + " " + student.lastName}</Typography>
         <Divider/>
-          <Box color="primary.main">First Name</Box>
-          <Box color="text.primary">Ashish</Box>
-          <Box color="primary.main">First Name</Box>
-          <Box color="text.primary">Ashish</Box>
+        <Grid container >
+          <Grid item xs={3}><Box component="div" color="primary.main">First Name</Box></Grid>
+          <Grid item xs={3}><Box color="text.primary">{student.firstName}</Box></Grid>
+          <Grid item xs={3}><Box color="primary.main">Middle Name</Box></Grid>
+          <Grid item xs={3}><Box color="text.primary">{student.middleName}</Box></Grid>
+          <Grid item xs={3}><Box color="primary.main">Last Name</Box></Grid>
+          <Grid item xs={3}><Box color="text.primary">{student.lastName}</Box></Grid>
+        </Grid>
+
+        
       </CardContent>
     </Card>);
   }

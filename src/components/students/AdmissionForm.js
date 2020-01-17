@@ -152,7 +152,7 @@ export default class AdmissionForm extends Component {
                           inputProps={{ onChange:this.onFormInputChange, field: "lastName"}}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <FormControl className={ "width100percent " + classes.formControl}>
+                        <FormControl className={ "width100percent " }>
                           <InputLabel id="blood-group-select">Blood Group</InputLabel>
                           <Select
                             labelId="blood-group-select"

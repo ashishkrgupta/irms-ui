@@ -9,8 +9,8 @@ import classes from "../AdmissionForm.module.css"
 
 export default class StudentSearchBar extends Component {
 
-  onChange = () => {
-
+  onChange = (event) => {
+    this.props.onChange(event);
   }
 
   render = () => {
@@ -21,11 +21,14 @@ export default class StudentSearchBar extends Component {
             <InputLabel id="class-select">Class</InputLabel>
             <Select
               labelId="class-select"
-              //value={this.state.student.bloodGroup}
-              //onChange={this.onFormInputChange}
+              value={''}
+              onChange={this.conChange}
             >
               <MenuItem value={''} >Select</MenuItem>
-              <MenuItem value={'a+'} >A+ve</MenuItem>
+              <MenuItem value={'1'} >Class 1st</MenuItem>
+              <MenuItem value={'2'} >Class 2nd</MenuItem>
+              <MenuItem value={'3'} >Class 3rd</MenuItem>
+              <MenuItem value={'4'} >Class 4th</MenuItem>
             </Select>
           </FormControl>
         </Grid>
@@ -34,8 +37,8 @@ export default class StudentSearchBar extends Component {
             <InputLabel id="section-select">Section</InputLabel>
             <Select
               labelId="section-select"
-              //value={this.state.student.bloodGroup}
-              //onChange={this.onFormInputChange}
+              value={''}
+              onChange={this.conChange}
             >
               <MenuItem value={''} >Select</MenuItem>
               <MenuItem value={'a+'} >A+ve</MenuItem>
@@ -47,8 +50,8 @@ export default class StudentSearchBar extends Component {
             <InputLabel id="roll-no-select">Roll No</InputLabel>
             <Select
               labelId="roll-no-select"
-              //value={this.state.student.bloodGroup}
-              //onChange={this.onFormInputChange}
+              value={''}
+              onChange={this.conChange}
             >
               <MenuItem value={''} >Select</MenuItem>
               <MenuItem value={'a+'} >A+ve</MenuItem>
