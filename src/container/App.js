@@ -3,16 +3,16 @@ import Container from '@material-ui/core/Container';
 import classes from './App.module.css';
 import Header from '../components/header/Header';
 import Sidenav from '../components/sidenav/Sidenav';
-import AdmissionForm from '../components/admissionform/AdmissionForm'
+import AdmissionForm from '../components/students/AdmissionForm'
 import FeeReceipt from '../components/feereceipt/FeeReceipt';
 import Dashboard from '../components/dashboard/Dashboard'
-import StudentDetails from '../components/admissionform/StudentDetails'
+import StudentList from '../components/students/list/StudentList'
 
 export default class App extends Component {
   
   state = {
 
-    selectedSubMenu: "new-admission",
+    selectedSubMenu: "student-list",
   };
 
   handleSubMenuClick = (subMenuId) => {
@@ -29,7 +29,7 @@ export default class App extends Component {
             { this.state.selectedSubMenu === "new-admission" && <AdmissionForm/> }
             { this.state.selectedSubMenu === "fee-receipt" && <FeeReceipt/> }
             { this.state.selectedSubMenu === "dashboard" && <Dashboard/> }
-            { this.state.selectedSubMenu === "issue-book" && <StudentDetails/> }
+            { this.state.selectedSubMenu === "student-list" && <StudentList/> }
           </Container>
         </div>
       );

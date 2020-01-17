@@ -3,6 +3,7 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+import DnsIcon from '@material-ui/icons/Dns';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import Collapse from '@material-ui/core/Collapse';
@@ -30,22 +31,21 @@ class Sidenav extends Component {
                 selected: false,
             },
             {
-                title: "Students 
-",
+                title: "Students",
                 id: "admission",
                 icon: <AccountBox/>,
-                open: false,
+                open: true,
                 submenus: [
                     {
                         title: "New Admission",
                         id: "new-admission",
                         icon: <PersonAddIcon/>,
-                        selected: true,
+                        selected: false,
                     },
                     {
                         title: "Student List",
                         id: "student-list",
-                        icon: <PersonAddIcon/>,
+                        icon: <DnsIcon/>,
                         selected: true,
                     }
                 ]
