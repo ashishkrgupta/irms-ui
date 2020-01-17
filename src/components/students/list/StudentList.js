@@ -6,8 +6,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+import Divider from '@material-ui/core/Divider'
 import CardContent from '@material-ui/core/CardContent';
 import StudentSearchBar from './StudentSearchBar'
 
@@ -41,7 +42,7 @@ export default class StudentList extends Component {
   };
 
   render = () => {
-    return (<Grid direction="row" justify="flex-start" spacing={1} alignItems="center">
+    return (<Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
       <StudentSearchBar/>
       {this.renderContainer()}
     </Grid>);
@@ -53,7 +54,7 @@ export default class StudentList extends Component {
         <Grid item xs={3}>
           <List>
           {this.state.students.map(student => 
-            <ListItem alignItems="flex-start" key={student.key} button>
+            <ListItem alignItems="flex-start" key={"student_" + student.id} button>
               <ListItemAvatar>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
               </ListItemAvatar>
@@ -73,7 +74,12 @@ export default class StudentList extends Component {
     let student = this.state.selectedStudent;
     return(<Card>
       <CardContent>
-    <Typography color="textSecondary">{student.firstName + " " + student.middleName + " " + student.lastName}</Typography>
+        <Typography variant="h5"  color="textSecondary">{student.firstName + " " + student.middleName + " " + student.lastName}</Typography>
+        <Divider/>
+          <Box color="primary.main">First Name</Box>
+          <Box color="text.primary">Ashish</Box>
+          <Box color="primary.main">First Name</Box>
+          <Box color="text.primary">Ashish</Box>
       </CardContent>
     </Card>);
   }
