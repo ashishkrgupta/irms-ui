@@ -46,7 +46,7 @@ export default class StudentSearchBar extends Component {
 
   render = () => {
     return (<Grid item xs={12} >
-      <Grid  container direction="row" justify="flex-start" alignItems="center">
+      <Grid  container direction="row" justify="center" alignItems="center">
         <Grid item xs={2} style= {{margin: "0px 5px"}}>
           <FormControl className={ "width100percent " + classes.formControl}>
             <InputLabel id="class-select">Class</InputLabel>

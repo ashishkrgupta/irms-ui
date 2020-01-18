@@ -16,7 +16,7 @@ export default class App extends Component {
   };
 
   handleSubMenuClick = (subMenuId) => {
-    console.log(subMenuId);
+    //console.log(subMenuId);
     this.setState({selectedSubMenu: subMenuId});
   }
 

@@ -10,6 +10,9 @@ import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import Divider from '@material-ui/core/Divider'
 import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
 import StudentSearchBar from './StudentSearchBar'
 
 export default class StudentList extends Component {
@@ -33,16 +36,15 @@ export default class StudentList extends Component {
       middleName: "",
       lastName: "Siddhpura"
     }],
-    selectedStudent: {
-      id: 3,
-      firstName: "Shweta",
-      middleName: "Ben",
-      lastName: "Siddhpura"
-    }
+    selectedStudent: null,
   };
 
   onChangeSearhBar = (option) => {
     console.log(option);
+  }
+
+  editStudent = () => {
+    console.log("edit student");
   }
 
   render = () => {
@@ -58,10 +60,10 @@ export default class StudentList extends Component {
   renderContainer = () => {
     return (<Grid item xs={12}>
       <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-        <Grid item xs={3}>
+        <Grid item xs={3} style={{background: "#dbdbdb52"}}>
           <List>
           {this.state.students.map(student => 
-            <ListItem alignItems="flex-start" key={"student_" + student.id} button>
+            <ListItem alignItems="flex-start" key={"student_" + student.id} button onClick={() => this.setState({selectedStudent: student})}>
               <ListItemAvatar>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
               </ListItemAvatar>
@@ -79,10 +81,18 @@ export default class StudentList extends Component {
 
   renderStudentDetail = () => {
     let student = this.state.selectedStudent;
-    return(<Card>
+    return(student && <Card variant="outlined">
       <CardContent>
-        <Typography variant="h5"  color="textSecondary">{student.firstName + " " + student.middleName + " " + student.lastName}</Typography>
-        <Divider/>
+        <CardHeader 
+        style={{background: "#dbdbdb", height:"25px"}}
+        title={student.firstName + " " + student.middleName + " " + student.lastName}
+        action={
+          <IconButton onClick={this.editStudent}>
+            <EditIcon />
+          </IconButton>
+        }
+        titleTypographyProps = {{variant: "h5"}}
+        />
         <Grid container >
           <Grid item xs={3}><Box component="div" color="primary.main">First Name</Box></Grid>
           <Grid item xs={3}><Box color="text.primary">{student.firstName}</Box></Grid>

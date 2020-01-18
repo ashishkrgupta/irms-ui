@@ -11,6 +11,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
+import CardHeader from '@material-ui/core/CardHeader';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -129,9 +130,12 @@ export default class AdmissionForm extends Component {
 
   render() {
     return (<Card>
+              <CardHeader
+                style={{textAlign:"center", height:"25px"}}
+                title = "New Admission" 
+                titleTypographyProps = {{variant: "h5"}}
+                />
               <CardContent>
-                <Typography variant="h5" component="h2"> New Admission  </Typography>
-                <Typography color="textSecondary">Enter details for the new admission </Typography>
                 <form noValidate autoComplete="off">
                   <Typography variant="h5" component="h2">A. Student Information  </Typography>
                   <Divider />
@@ -207,8 +211,8 @@ export default class AdmissionForm extends Component {
                           inputProps={{ onChange:this.onFormInputChange, field: "nationality"}}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Relegion" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "relegion"}}/>
+                        <TextField className="width100percent" label="Religion" 
+                          inputProps={{ onChange:this.onFormInputChange, field: "religion"}}/>
                       </Grid>
                       <Grid item xs={4}>
                         <TextField className="width100percent" label="Community" 
