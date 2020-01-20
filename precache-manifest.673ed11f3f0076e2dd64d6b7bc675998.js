@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "524d745348c678260c76149e3c72155c",
+    "revision": "5beb9aa87b3ffcd059b35f5192185451",
     "url": "/irms-ui/index.html"
   },
   {
-    "revision": "f0ff8c389438b455727a",
-    "url": "/irms-ui/static/css/main.2d33d88a.chunk.css"
+    "revision": "6e576482b283c353142b",
+    "url": "/irms-ui/static/css/main.c0dc4e24.chunk.css"
   },
   {
-    "revision": "f58fdb0336b1e0741e5f",
-    "url": "/irms-ui/static/js/2.64547c66.chunk.js"
+    "revision": "2601825865bb7d55159b",
+    "url": "/irms-ui/static/js/2.7b9a76bf.chunk.js"
   },
   {
     "revision": "84545ce239af0f818b69022fc2b83cdf",
-    "url": "/irms-ui/static/js/2.64547c66.chunk.js.LICENSE"
+    "url": "/irms-ui/static/js/2.7b9a76bf.chunk.js.LICENSE"
   },
   {
-    "revision": "f0ff8c389438b455727a",
-    "url": "/irms-ui/static/js/main.fa23d9b2.chunk.js"
+    "revision": "6e576482b283c353142b",
+    "url": "/irms-ui/static/js/main.851a284b.chunk.js"
   },
   {
     "revision": "ae6efc9d2cbec41d2d5a",
