@@ -24,6 +24,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
 import StudentSearchBar from './StudentSearchBar'
+import classes from './StudentList.module.css'
 
 export default class StudentList extends Component {
 
@@ -90,7 +91,7 @@ export default class StudentList extends Component {
   }
 
   renderTable = () => {
-    return(<Paper style={{width: "calc(100% - 20px)", margin: "10px auto"}}>
+    return(<Paper className = {classes['.table-container']} >
       <TableContainer style={{maxHeight:"500px"}}>
       <Table stickyHeader aria-label="customized table">
         <TableHead style={{background:"black"}}>

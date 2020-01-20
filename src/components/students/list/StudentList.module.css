@@ -1,0 +1,8 @@
+.table-container {
+  width: calc(100% - 20px);
+  margin: 10px auto;;
+}
+
+tr:nth-child(even) {background: #f9f9f9}
+tr:nth-child(odd) {background: #FFF}
+tr:hover {background: #dbdbdb82;}
