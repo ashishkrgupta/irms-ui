@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
@@ -13,29 +14,43 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TablePagination from '@material-ui/core/TablePagination';
+import Paper from '@material-ui/core/Paper';
 import StudentSearchBar from './StudentSearchBar'
 
 export default class StudentList extends Component {
 
   state = {
     students : [{
-      id: 1,
+      id: 1, enrollmentId:"1",
       firstName: "Ashish",
       middleName: "Kumar",
       lastName: "Gupta"
     },
-    {
-      id: 2,
-      firstName: "Ajay",
-      middleName: "Kumar",
-      lastName: "Singh"
-    },
-    {
-      id: 3,
-      firstName: "Shweta",
-      middleName: "",
-      lastName: "Siddhpura"
-    }],
+    { id: 2, enrollmentId:"2", firstName: "Ajay", middleName: "Kumar", lastName: "Singh" },
+    { id: 3, enrollmentId:"3", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
+    { id: 4, enrollmentId:"4", firstName: "Ramesh", middleName: "Kumar", lastName: "Pandey" },
+    { id: 5, enrollmentId:"5", firstName: "Deepak", middleName: "", lastName: "Chaudhary" },
+    { id: 6, enrollmentId:"6", firstName: "Aashik", middleName: "", lastName: "Manandhar" },
+    { id: 7, enrollmentId:"7", firstName: "Manish", middleName: "Kumar", lastName: "" },
+    { id: 8, enrollmentId:"8", firstName: "Chirag", middleName: "", lastName: "Joshi" },
+    { id: 9, enrollmentId:"9", firstName: "Utsav", middleName: "Bhai", lastName: "Mehta" },
+    { id: 10, enrollmentId:"10", firstName: "Bhavdip", middleName: "", lastName: "Bhalodia" },
+    { id: 11, enrollmentId:"11", firstName: "Jagan", middleName: "", lastName: "Siddhpura" },
+    { id: 12, enrollmentId:"12", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
+    { id: 13, enrollmentId:"13", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
+    { id: 14, enrollmentId:"14", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
+    { id: 15, enrollmentId:"15", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
+    { id: 16, enrollmentId:"16", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
+    { id: 17, enrollmentId:"17", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
+    { id: 18, enrollmentId:"18", firstName: "Shweta", middleName: "", lastName: "Siddhpura" }],
     selectedStudent: null,
   };
 
@@ -47,14 +62,112 @@ export default class StudentList extends Component {
     console.log("edit student");
   }
 
+  onFilterInputChange = (event) => {
+    alert(event.target.value);
+  }
+
   render = () => {
     return (<Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
       <StudentSearchBar
         //onChange={this.onChangeSearhBar}
         onSearchClick={this.onChangeSearhBar}
       />
-      {this.renderContainer()}
+      {this.renderTable()}
+      {//this.renderContainer()
+      }
     </Grid>);
+  }
+
+  renderTable = () => {
+    return(<Paper style={{width: "calc(100% - 20px)", margin: "10px auto"}}>
+      <TableContainer style={{maxHeight:"500px"}}>
+      <Table stickyHeader aria-label="customized table">
+        <TableHead style={{background:"black"}}>
+          <TableRow>
+            <TableCell align="center">Enrollment Id</TableCell>
+            <TableCell align="center">First Name</TableCell>
+            <TableCell align="center">Middle Name</TableCell>
+            <TableCell align="center">Last Name</TableCell>
+            <TableCell align="center">Class</TableCell>
+            <TableCell align="center">Section</TableCell>
+            <TableCell align="center">Roll No</TableCell>
+            <TableCell align="center">Action</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow>
+            <TableCell align="center" className="padding0px">
+              <TextField 
+                className="width100percent" 
+                inputProps={{ onChange:this.onFilterInputChange, field: "entollmetId", placeholder:"enrollment id"}}
+              />
+            </TableCell>
+            <TableCell align="center" className="padding0px">
+              <TextField 
+                className="width100percent" 
+                inputProps={{ onChange:this.onFilterInputChange, field: "firstName", placeholder:"first name"}}
+              />
+            </TableCell>
+            <TableCell align="center" className="padding0px">
+              <TextField 
+                className="width100percent" 
+                inputProps={{ onChange:this.onFilterInputChange, field: "middleName", placeholder:"middle name"}}
+              />
+            </TableCell>
+            <TableCell align="center" className="padding0px">
+              <TextField 
+                className="width100percent" 
+                inputProps={{ onChange:this.onFilterInputChange, field: "lastName", placeholder:"last name"}}
+              />
+            </TableCell>
+            <TableCell align="center" className="padding0px">
+              <TextField 
+                className="width100percent" 
+                inputProps={{ onChange:this.onFilterInputChange, field: "class", placeholder:"class"}}
+              />
+            </TableCell>
+            <TableCell align="center" className="padding0px">
+              <TextField 
+                className="width100percent" 
+                inputProps={{ onChange:this.onFilterInputChange, field: "section", placeholder:"section"}}
+              />
+            </TableCell>
+            <TableCell align="center" className="padding0px">
+              <TextField 
+                className="width100percent" 
+                inputProps={{ onChange:this.onFilterInputChange, field: "rollNo", placeholder:"roll no"}}
+              />
+            </TableCell>
+            <TableCell align="center" className="padding0px"></TableCell>
+          </TableRow>
+          {this.state.students.map(student => (
+            <TableRow key={student.id}>
+              <TableCell align="center" component="th" scope="row">{student.enrollmentId}</TableCell>
+              <TableCell align="center">{student.firstName}</TableCell>
+              <TableCell align="center">{student.middleName}</TableCell>
+              <TableCell align="center">{student.lastName}</TableCell>
+              <TableCell align="center">{student.class}</TableCell>
+              <TableCell align="center">{student.section}</TableCell>
+              <TableCell align="center">{student.rollNo}</TableCell>
+              <TableCell align="center" className="padding0px" style={{width:"100px", height:"52px", display:"flex"}}>
+                <IconButton><VisibilityIcon/></IconButton>
+                <IconButton><EditIcon/></IconButton>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+    <TablePagination
+        //rowsPerPageOptions={[10, 25, 100]}
+        component="div"
+        count={this.state.students.length}
+        rowsPerPage={10}
+        page={1}
+        //onChangePage={handleChangePage}
+        //onChangeRowsPerPage={handleChangeRowsPerPage}
+      />
+    </Paper>);
   }
 
   renderContainer = () => {
