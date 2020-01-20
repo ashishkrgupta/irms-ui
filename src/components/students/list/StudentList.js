@@ -27,8 +27,14 @@ import StudentSearchBar from './StudentSearchBar'
 
 export default class StudentList extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state.students = this.state.allStudents;
+  }
+
   state = {
-    students : [{
+    students : [],
+    allStudents : [{
       id: 1, enrollmentId:"1",
       firstName: "Ashish",
       middleName: "Kumar",
@@ -63,7 +69,12 @@ export default class StudentList extends Component {
   }
 
   onFilterInputChange = (event) => {
-    alert(event.target.value);
+    let key = event.target.getAttribute('field');
+    let allStudents = [...this.state.allStudents];
+    let filtered = allStudents.filter(std => { 
+      //  console.log(std[key]);
+      return (std[key] + "").toLowerCase().indexOf(event.target.value.toLowerCase()) > -1 ; });
+    this.setState({students: filtered});
   }
 
   render = () => {
@@ -99,7 +110,7 @@ export default class StudentList extends Component {
             <TableCell align="center" className="padding0px">
               <TextField 
                 className="width100percent" 
-                inputProps={{ onChange:this.onFilterInputChange, field: "entollmetId", placeholder:"enrollment id"}}
+                inputProps={{ onChange:this.onFilterInputChange, field: "enrollmentId", placeholder:"enrollment id"}}
               />
             </TableCell>
             <TableCell align="center" className="padding0px">
