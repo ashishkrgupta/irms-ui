@@ -31,8 +31,11 @@ export default class AdmissionForm extends Component {
     super(props);
     this.state = {
       student: {
-        bloodGroup: "",
-        gender:"",
+        firstName: "Ashish",
+        middleName: "Kumar",
+        lastName: "Gupta",
+        bloodGroup: "a+",
+        gender:"male",
         father: {},
         mother: {},
         resAddress: {},
@@ -144,16 +147,16 @@ export default class AdmissionForm extends Component {
                     <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                       <Grid item xs={4}>
                         <TextField className="width100percent" label="First Name" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "firstName"}}
+                          inputProps={{ onChange:this.onFormInputChange, field: "firstName", value:this.state.student.firstName}}
                         />
                       </Grid>
                       <Grid item xs={4}>
                         <TextField className="width100percent" label="Middle Name"  
-                          inputProps={{ onChange:this.onFormInputChange, field: "middleName"}}/>
+                          inputProps={{ onChange:this.onFormInputChange, field: "middleName", value:this.state.student.middleName}}/>
                       </Grid>
                       <Grid item xs={4}>
                         <TextField className="width100percent" label="Last Name"  
-                          inputProps={{ onChange:this.onFormInputChange, field: "lastName"}}/>
+                          inputProps={{ onChange:this.onFormInputChange, field: "lastName", value:this.state.student.lastName}}/>
                       </Grid>
                       <Grid item xs={4}>
                         <FormControl className={ "width100percent " }>
