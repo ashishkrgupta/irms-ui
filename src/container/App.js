@@ -7,6 +7,7 @@ import AdmissionForm from '../components/students/AdmissionForm'
 import FeeReceipt from '../components/feereceipt/FeeReceipt';
 import Dashboard from '../components/dashboard/Dashboard'
 import StudentList from '../components/students/list/StudentList'
+import StudentDetails from "../components/students/details/StudentDetails"
 
 export default class App extends Component {
   
@@ -30,6 +31,7 @@ export default class App extends Component {
             { this.state.selectedSubMenu === "fee-receipt" && <FeeReceipt/> }
             { this.state.selectedSubMenu === "dashboard" && <Dashboard/> }
             { this.state.selectedSubMenu === "student-list" && <StudentList/> }
+            { this.state.selectedSubMenu === "student-detail" && <StudentDetails/> }
           </Container>
         </div>
       );

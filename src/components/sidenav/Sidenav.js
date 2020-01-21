@@ -47,6 +47,12 @@ class Sidenav extends Component {
                         id: "student-list",
                         icon: <DnsIcon/>,
                         selected: true,
+                    },
+                    {
+                        title: "Student Detail",
+                        id: "student-detail",
+                        icon: <DnsIcon/>,
+                        selected: true,
                     }
                 ]
             },
