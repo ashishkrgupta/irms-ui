@@ -35,6 +35,11 @@ export default class AdmissionForm extends Component {
         middleName: "Kumar",
         lastName: "Gupta",
         bloodGroup: "a+",
+        nationality: "Indian",
+        aadharNo: "123456789",
+        religion: "Hindu",
+        community: "OBC",
+        languageKnown: "Englidh, Hindi",
         gender:"male",
         father: {},
         mother: {},
@@ -135,28 +140,39 @@ export default class AdmissionForm extends Component {
     return (<Card>
               <CardHeader
                 style={{textAlign:"center", height:"25px"}}
-                title = "Student Details" 
+                title = {this.state.student.firstName + " " + this.state.student.middleName + " " + this.state.student.lastName}
                 titleTypographyProps = {{variant: "h5"}}
                 />
               <CardContent>
                 <form noValidate autoComplete="off">
                   <Typography variant="h5" component="h2">A. Student Information  </Typography>
-                  <Divider />
+                  <Divider className={classes["margin-bottom10px"]}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     <Grid item xs={9}>
                     <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="First Name" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "firstName", value:this.state.student.firstName}}
-                        />
+                        <div className="MuiFormControl-root MuiTextField-root width100percent">
+                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">First Name</label>
+                          <div className="MuiInputBase-root MuiInput-root MuiInputBase-formControl MuiInput-formControl">
+                            {this.state.student.firstName}
+                          </div>
+                        </div>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Middle Name"  
-                          inputProps={{ onChange:this.onFormInputChange, field: "middleName", value:this.state.student.middleName}}/>
+                        <div className="MuiFormControl-root MuiTextField-root width100percent">
+                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Middle Name</label>
+                          <div className="MuiInputBase-root MuiInput-root MuiInputBase-formControl MuiInput-formControl">
+                            {this.state.student.middleName}
+                          </div>
+                        </div>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Last Name"  
-                          inputProps={{ onChange:this.onFormInputChange, field: "lastName", value:this.state.student.lastName}}/>
+                        <div className="MuiFormControl-root MuiTextField-root width100percent">
+                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Last Name</label>
+                          <div className="MuiInputBase-root MuiInput-root MuiInputBase-formControl MuiInput-formControl">
+                            {this.state.student.lastName}
+                          </div>
+                        </div>
                       </Grid>
                       <Grid item xs={4}>
                         <FormControl className={ "width100percent " }>
@@ -210,24 +226,45 @@ export default class AdmissionForm extends Component {
                           </MuiPickersUtilsProvider>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Nationality" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "nationality"}}/>
+                        
+                      <div className="MuiFormControl-root MuiTextField-root width100percent">
+                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Nationality</label>
+                          <div className="MuiInputBase-root MuiInput-root MuiInputBase-formControl MuiInput-formControl">
+                            { this.state.student.nationality }
+                          </div>
+                        </div>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Religion" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "religion"}}/>
+                        <div className="MuiFormControl-root MuiTextField-root width100percent">
+                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Religion</label>
+                          <div className="MuiInputBase-root MuiInput-root MuiInputBase-formControl MuiInput-formControl">
+                            {this.state.student.religion}
+                          </div>
+                        </div>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Community" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "community"}}/>
+                        <div className="MuiFormControl-root MuiTextField-root width100percent">
+                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Community</label>
+                          <div className="MuiInputBase-root MuiInput-root MuiInputBase-formControl MuiInput-formControl">
+                            {this.state.student.community}
+                          </div>
+                        </div>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Aadhar No" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "aadharNo"}}/>
+                        <div className="MuiFormControl-root MuiTextField-root width100percent">
+                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Aadhar No</label>
+                          <div className="MuiInputBase-root MuiInput-root MuiInputBase-formControl MuiInput-formControl">
+                            {this.state.student.aadharNo}
+                          </div>
+                        </div>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Language Known" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "languageKnown"}}/>
+                        <div className="MuiFormControl-root MuiTextField-root width100percent">
+                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-shrink MuiFormLabel-filled" data-shrink="true">Language Known</label>
+                          <div className="MuiInputBase-root MuiInput-root MuiInputBase-formControl MuiInput-formControl">
+                            {this.state.student.languageKnown }
+                          </div>
+                        </div>
                       </Grid>
                     </Grid>
                     </Grid>
