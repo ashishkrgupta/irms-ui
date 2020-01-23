@@ -16,46 +16,33 @@ import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import classes from "./StudentDetails.module.css"
+import { STUDENTS_URL } from "../../../config";
+import axios from 'axios';
+import Moment from 'moment';
 
 export default class AdmissionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      student: {
-        firstName: "Ashish",
-        middleName: "Kumar",
-        lastName: "Gupta",
-        bloodGroup: "a+",
-        nationality: "Indian",
-        aadharNo: "123456789",
-        religion: "Hindu",
-        community: "OBC",
-        languageKnown: "Englidh, Hindi",
-        gender:"male",
-        father: {},
-        mother: {},
-        resAddress: {},
-        corAddress:{},
-        documents:[{
-          documentType:"",
-          filename:""
-        }],
-        emergencyContacts:[{
-            contactNumber:"",
-            personName:"",
-            relationWithStudent:""
-          },
-          {
-            contactNumber:"",
-            personName:"",
-            relationWithStudent:""
-          }
-        ]
-      }
+      student: { }
     }
   }
 
+  componentDidMount = () => {
+    console.log('component mounted ' + STUDENTS_URL + "/1");
+    axios.get(STUDENTS_URL + "/1").then(response => {
+      console.log(response);
+      this.setState({student: response.data});
+    });
+  }
+
   render() {
+    let father = this.state.student.relatives ? this.state.student.relatives.find(rel => { return rel.relation === 'father'; } ) : null;
+    let mother = this.state.student.relatives ? this.state.student.relatives.find(rel => { return rel.relation === 'mother'; } ) : null;
+
+    let resAddr = this.state.student.addressList ? this.state.student.addressList.find(addr => { return addr.addressType === 'resAddress'; } ) : null;
+    let corAddr = this.state.student.addressList ? this.state.student.addressList.find(addr => { return addr.addressType === 'corAddress'; } ) : null;
+
     return (<Card>
               <CardHeader
                 style={{textAlign:"center", height:"25px"}}
@@ -104,7 +91,7 @@ export default class AdmissionForm extends Component {
                         <div className="MuiFormControl-root MuiTextField-root width100percent">
                           <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Blood Group</label>
                           <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            { this.state.student.bloodGroup }
+                            { this.state.student.bloodGroup + "ve" }
                           </div>
                         </div>
                       </Grid>
@@ -120,7 +107,7 @@ export default class AdmissionForm extends Component {
                         <div className="MuiFormControl-root MuiTextField-root width100percent">
                           <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Date of Birth</label>
                           <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            { this.state.student.dateOfBirth }
+                            { this.state.student.dateOfBirth ? Moment(this.state.student.dateOfBirth).format('d-MMM-YYYY') : "" }
                           </div>
                         </div>
                       </Grid>
@@ -184,7 +171,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">First Name</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.father.firstName }
+                          { father ? father.firstName : "" }
                         </div>
                       </div>
                     </Grid>
@@ -192,7 +179,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Middle Name</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.father.middleName }
+                          { father ? father.middleName : "" }
                         </div>
                       </div>
                     </Grid>
@@ -200,7 +187,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Last Name</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.father.lastName }
+                          { father ? father.lastName : "" }
                         </div>
                       </div>
                     </Grid>
@@ -211,7 +198,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">First Name</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.mother.firstName }
+                          { mother ? mother.firstName : "" }
                         </div>
                       </div>
                     </Grid>
@@ -219,7 +206,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Middle Name</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.mother.middleName }
+                          { mother ? mother.middleName : "" }
                         </div>
                       </div>
                     </Grid>
@@ -227,7 +214,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Last Name</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.mother.lastName }
+                          { mother ? mother.lastName : "" }
                         </div>
                       </div>
                     </Grid>
@@ -263,7 +250,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Address Line 1</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.resAddress.line1 }
+                          { resAddr ? resAddr.line1 : "" }
                         </div>
                       </div>
                     </Grid>
@@ -271,7 +258,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Address Line 2</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.resAddress.line2 }
+                          { resAddr ? resAddr.line2 : "" }
                         </div>
                       </div>
                     </Grid>
@@ -279,7 +266,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">City</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.resAddress.city }
+                          { resAddr ? resAddr.city : "" }
                         </div>
                       </div>
                     </Grid>
@@ -287,7 +274,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">State/Provience</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.resAddress.state }
+                          { resAddr ? resAddr.state : "" }
                         </div>
                       </div>
                     </Grid>
@@ -295,7 +282,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Country</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.resAddress.country }
+                          { resAddr ? resAddr.country : "" }
                         </div>
                       </div>
                     </Grid>
@@ -303,7 +290,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Pin Code</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.resAddress.pin }
+                          { resAddr ? resAddr.pin : "" }
                         </div>
                       </div>
                     </Grid>
@@ -315,7 +302,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Address Line 1</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.corAddress.line1 }
+                          { corAddr ? corAddr.line1 : "" }
                         </div>
                       </div>
                     </Grid>
@@ -323,7 +310,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Address Line 2</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.corAddress.line2 }
+                          { corAddr ? corAddr.line2 : "" }
                         </div>
                       </div>
                     </Grid>
@@ -331,7 +318,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">City</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.corAddress.city }
+                          { corAddr ? corAddr.city : "" }
                         </div>
                       </div>
                     </Grid>
@@ -339,7 +326,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">State/Provience</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.corAddress.state }
+                          { corAddr ? corAddr.state : "" }
                         </div>
                       </div>
                     </Grid>
@@ -347,7 +334,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Country</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.corAddress.country }
+                          { corAddr ? corAddr.country : "" }
                         </div>
                       </div>
                     </Grid>
@@ -355,7 +342,7 @@ export default class AdmissionForm extends Component {
                       <div className="MuiFormControl-root MuiTextField-root width100percent">
                         <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Pin Code</label>
                         <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.corAddress.pin }
+                          { corAddr ? corAddr.pin : "" }
                         </div>
                       </div>
                     </Grid>
@@ -363,7 +350,7 @@ export default class AdmissionForm extends Component {
                   <Typography className={"margintop20px " }>Emergency Contact</Typography>
                   <Divider  className={classes["margin-bottom10px"] + ' ' + classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    {this.state.student.emergencyContacts.map((contact, i) => {
+                    { this.state.student.emergencyContacts && this.state.student.emergencyContacts.map((contact, i) => {
                       return [<Grid item xs={4} key={"0" + i}>
                         <div className="MuiFormControl-root MuiTextField-root width100percent">
                           <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Contact Number</label>
@@ -393,7 +380,7 @@ export default class AdmissionForm extends Component {
                   <Typography variant="h5" component="h2"  className="margintop20px">C. Enclosure  </Typography>
                   <Divider  className={classes["margin-bottom10px"]}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    { this.state.student.documents.map((doc, index) => {
+                    { this.state.student.documents && this.state.student.documents.map((doc, index) => {
                         return[<Grid item xs={1} key = {"doc_ctrl_" + index} style={{paddingTop: "14px"}} >
                           {index === 0 && <AddCircleIcon style={{ fontSize: 35, cursor: "pointer"  }} onClick={this.addDocumentRow}/>}
                           <RemoveCircleIcon style={{ fontSize: 35, cursor: "pointer", float:"right" }} onClick={ () => this.removeDocumentRow(index)}/>
