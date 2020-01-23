@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "741edfcdd27244c213784179bc37209e",
+    "revision": "227cde8e492c55c172ee251b797c8177",
     "url": "/irms-ui/index.html"
   },
   {
-    "revision": "bdbd888c5353b2d35317",
+    "revision": "148688afd67d04308ba2",
     "url": "/irms-ui/static/css/main.d27cdf9e.chunk.css"
   },
   {
-    "revision": "1914f83829437d406399",
-    "url": "/irms-ui/static/js/2.bab7bb14.chunk.js"
+    "revision": "8bca3f08f4c726e033de",
+    "url": "/irms-ui/static/js/2.f21cd665.chunk.js"
   },
   {
     "revision": "84545ce239af0f818b69022fc2b83cdf",
-    "url": "/irms-ui/static/js/2.bab7bb14.chunk.js.LICENSE"
+    "url": "/irms-ui/static/js/2.f21cd665.chunk.js.LICENSE"
   },
   {
-    "revision": "bdbd888c5353b2d35317",
-    "url": "/irms-ui/static/js/main.e9dca306.chunk.js"
+    "revision": "148688afd67d04308ba2",
+    "url": "/irms-ui/static/js/main.bc046397.chunk.js"
   },
   {
     "revision": "ae6efc9d2cbec41d2d5a",
