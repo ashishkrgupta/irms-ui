@@ -23,6 +23,8 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
 import StudentSearchBar from './StudentSearchBar'
 import classes from './StudentList.module.css'
+import Axios from "axios";
+import { STUDENTS_URL } from "../../../config";
 
 export default class StudentList extends Component {
 
@@ -86,6 +88,16 @@ export default class StudentList extends Component {
       {//this.renderContainer()
       }
     </Grid>);
+  }
+
+  componentWillMount = () => {
+    Axios.get(STUDENTS_URL).then(
+      resp => {
+        console.log(resp.data);
+      }, 
+      error => {
+        console.log(error);
+      });
   }
 
   renderTable = () => {
