@@ -12,6 +12,8 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import EditIcon from '@material-ui/icons/Edit';
+import Button from '@material-ui/core/Button';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import classes from "./StudentDetails.module.css"
 
@@ -59,6 +61,13 @@ export default class AdmissionForm extends Component {
                 style={{textAlign:"center", height:"25px"}}
                 title = {this.state.student.firstName + " " + this.state.student.middleName + " " + this.state.student.lastName}
                 titleTypographyProps = {{variant: "h5"}}
+                action={
+                <Button variant="contained" onClick={this.saveData} color="primary">
+                  <EditIcon />
+                  Edit
+                </Button>
+                  
+                }
                 />
               <CardContent>
                 <form noValidate autoComplete="off">

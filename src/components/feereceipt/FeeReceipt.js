@@ -10,25 +10,13 @@ import ReactToPrint from "react-to-print";
 
 export default class FeeReceipt extends Component {
 
-  printReceipt = () => {
-    let el = document.getElementById('toBePrinted')
-    alert("print clicked" + el);
-
-   let a = window.open('', '', 'height=1, width=1'); 
-            a.document.write(el.innerHTML); 
-            a.document.close(); 
-            a.print(); 
-            a.close()
-    //el.print();
-  }
-
   render() {
     return (<Card>
       <CardHeader
         style={{textAlign:"center", height:"25px"}}
         action={
           <ReactToPrint
-           trigger = { () => <IconButton onClick={this.printReceipt}>
+           trigger = { () => <IconButton>
             <PrintIcon />
           </IconButton>}
           content={() => this.componentRef}
