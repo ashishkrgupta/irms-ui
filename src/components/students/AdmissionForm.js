@@ -24,7 +24,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import classes from "./AdmissionForm.module.css"
-import { STUDENTS_URL } from "../../config";
+import { IRMS_SERVICE } from "../../servers";
 
 export default class AdmissionForm extends Component {
   constructor(props) {
@@ -114,14 +114,16 @@ export default class AdmissionForm extends Component {
     student.emergencyContacts[event.target.attributes.index.value][event.target.attributes.field.value] = event.target.value;
     this.setState({student});
   }
-   saveData = async () => {
-    const response = await fetch(STUDENTS_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(this.state.student),
-    })
-    //console.log(await response.json())
-    alert(response);
+  
+  saveData = async () => {
+    IRMS_SERVICE.post("/students", JSON.stringify(this.state.student)).then(
+      resp => {
+          console.log(resp)
+      },
+      error => {
+
+      }
+    );
    }
 
   componentDidUpdate = () => {

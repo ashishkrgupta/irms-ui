@@ -5,16 +5,12 @@ import Divider from '@material-ui/core/Divider'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import CardHeader from '@material-ui/core/CardHeader';
-import Select from '@material-ui/core/Select';
-import InputBase from '@material-ui/core/InputBase';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
 import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import IconButton from '@material-ui/core/IconButton';
+import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
+import LabelBox from '../../common/LabelBox'
 import classes from "./StudentDetails.module.css"
 import {IRMS_SERVICE} from '../../../servers'
 import Moment from 'moment';
@@ -62,92 +58,38 @@ export default class AdmissionForm extends Component {
                     <Grid item xs={9}>
                     <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">First Name</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            {this.state.student.firstName}
-                          </div>
-                        </div>
+                        <LabelBox label="First Name" value={this.state.student.firstName}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Middle Name</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            {this.state.student.middleName}
-                          </div>
-                        </div>
+                        <LabelBox label="Middle Name" value={this.state.student.middleName}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Last Name</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            {this.state.student.lastName}
-                          </div>
-                        </div>
+                        <LabelBox label="Last Name" value={this.state.student.lastName}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Blood Group</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            { this.state.student.bloodGroup + "ve" }
-                          </div>
-                        </div>
+                        <LabelBox label="Blood Group" value={this.state.student.bloodGroup + "ve"}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Gender</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            { this.state.student.gender }
-                          </div>
-                        </div>
+                        <LabelBox label="Gender" value={this.state.student.gender}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Date of Birth</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            { this.state.student.dateOfBirth ? Moment(this.state.student.dateOfBirth).format('d-MMM-YYYY') : "" }
-                          </div>
-                        </div>
+                        <LabelBox label="Date of Birth" 
+                                  value={this.state.student.dateOfBirth ? Moment(this.state.student.dateOfBirth).format('d-MMM-YYYY') : ""}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Nationality</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            { this.state.student.nationality }
-                          </div>
-                        </div>
+                        <LabelBox label="Nationality" value={this.state.student.nationality}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Religion</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            {this.state.student.religion}
-                          </div>
-                        </div>
+                        <LabelBox label="Religion" value={this.state.student.religion}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Community</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            {this.state.student.community}
-                          </div>
-                        </div>
+                        <LabelBox label="Community" value={this.state.student.community}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Aadhar No</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            {this.state.student.aadharNo}
-                          </div>
-                        </div>
+                        <LabelBox label="Aadhar Number" value={this.state.student.aadharNo}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Language Known</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            {this.state.student.languageKnown }
-                          </div>
-                        </div>
+                        <LabelBox label="Language Known" value={this.state.student.languageKnown}/>
                       </Grid>
                     </Grid>
                     </Grid>
@@ -166,183 +108,78 @@ export default class AdmissionForm extends Component {
                       <Typography color="textSecondary" className={classes.margintop15px} >Father's Name</Typography>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">First Name</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { father ? father.firstName : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="First Name" value={father ? father.firstName : ""}/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Middle Name</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { father ? father.middleName : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Middle Name" value={father ? father.middleName : ""}/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Last Name</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { father ? father.lastName : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Last Name" value={father ? father.lastName : ""}/>
                     </Grid>
                     <Grid item xs={2}>
                       <Typography color="textSecondary" className={classes.margintop15px} >Mother's Name</Typography>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">First Name</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { mother ? mother.firstName : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="First Name" value={mother ? mother.firstName : ""}/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Middle Name</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { mother ? mother.middleName : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Middle Name" value={mother ? mother.middleName : ""}/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Last Name</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { mother ? mother.lastName : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Last Name" value={mother ? mother.lastName : ""}/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Mobile Number</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.mobile }
-                        </div>
-                      </div>
+                      <LabelBox label="Mobile Number" value={this.state.student.mobile}/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Phone Number</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.phoneNumber }
-                        </div>
-                      </div>
+                      <LabelBox label="Phone Number" value={this.state.student.phoneNumber}/>
                     </Grid>
                     <Grid item xs={5}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Email Address</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { this.state.student.email }
-                        </div>
-                      </div>
+                      <LabelBox label="Email" value={this.state.student.email}/>
                     </Grid>
                   </Grid>
                   <Typography className={"margintop20px " }>Residential Address</Typography>
                   <Divider className={classes["margin-bottom10px"] + ' ' + classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     <Grid item xs={6}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Address Line 1</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { resAddr ? resAddr.line1 : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Line 1" value={ resAddr ? resAddr.line1 : "" }/>
                     </Grid>
                     <Grid item xs={6}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Address Line 2</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { resAddr ? resAddr.line2 : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Line 2" value={ resAddr ? resAddr.line2 : "" }/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">City</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { resAddr ? resAddr.city : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="City" value={ resAddr ? resAddr.city : "" }/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">State/Provience</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { resAddr ? resAddr.state : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="State/Provience" value={ resAddr ? resAddr.state : "" }/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Country</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { resAddr ? resAddr.country : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Country" value={ resAddr ? resAddr.country : "" }/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Pin Code</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { resAddr ? resAddr.pin : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Pin Code" value={ resAddr ? resAddr.pin : "" }/>
                     </Grid>
                   </Grid>
                   <Typography className={"margintop20px " }>Correspondence Address</Typography>
                   <Divider  className={classes["margin-bottom10px"] + ' ' + classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    <Grid item xs={6}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Address Line 1</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { corAddr ? corAddr.line1 : "" }
-                        </div>
-                      </div>
+                  <Grid item xs={6}>
+                      <LabelBox label="Line 1" value={ corAddr ? corAddr.line1 : "" }/>
                     </Grid>
                     <Grid item xs={6}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Address Line 2</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { corAddr ? corAddr.line2 : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Line 2" value={ corAddr ? corAddr.line2 : "" }/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">City</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { corAddr ? corAddr.city : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="City" value={ corAddr ? corAddr.city : "" }/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">State/Provience</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { corAddr ? corAddr.state : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="State/Provience" value={ corAddr ? corAddr.state : "" }/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Country</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { corAddr ? corAddr.country : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Country" value={ corAddr ? corAddr.country : "" }/>
                     </Grid>
                     <Grid item xs={3}>
-                      <div className="MuiFormControl-root MuiTextField-root width100percent">
-                        <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Pin Code</label>
-                        <div className={"MuiInput-formControl " + classes.labelvalue}>
-                          { corAddr ? corAddr.pin : "" }
-                        </div>
-                      </div>
+                      <LabelBox label="Pin Code" value={ corAddr ? corAddr.pin : "" }/>
                     </Grid>
                   </Grid>
                   <Typography className={"margintop20px " }>Emergency Contact</Typography>
@@ -350,28 +187,13 @@ export default class AdmissionForm extends Component {
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     { this.state.student.emergencyContacts && this.state.student.emergencyContacts.map((contact, i) => {
                       return [<Grid item xs={4} key={"0" + i}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Contact Number</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            { contact.contactNumber }
-                          </div>
-                        </div>
+                        <LabelBox label="Contact Number" value={ contact.contactNumber }/>
                       </Grid>,
                       <Grid item xs={4} key={"1" + i}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Name of Contact Person</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            { contact.personName }
-                          </div>
-                        </div>
+                        <LabelBox label="Name of Contact Person" value={ contact.personName }/>
                       </Grid>,
                       <Grid item xs={4} key={"2" + i}>
-                        <div className="MuiFormControl-root MuiTextField-root width100percent">
-                          <label className="Mui-focused MuiFormLabel-root MuiInputLabel-formControl MuiInputLabel-shrink">Relation with Student</label>
-                          <div className={"MuiInput-formControl " + classes.labelvalue}>
-                            { contact.relationWithStudent }
-                          </div>
-                        </div>
+                        <LabelBox label="Relation with Student" value={ contact.relationWithStudent }/>
                       </Grid>];
                     })}
                   </Grid>
@@ -379,28 +201,14 @@ export default class AdmissionForm extends Component {
                   <Divider  className={classes["margin-bottom10px"]}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     { this.state.student.documents && this.state.student.documents.map((doc, index) => {
-                        return[<Grid item xs={1} key = {"doc_ctrl_" + index} style={{paddingTop: "14px"}} >
-                          {index === 0 && <AddCircleIcon style={{ fontSize: 35, cursor: "pointer"  }} onClick={this.addDocumentRow}/>}
-                          <RemoveCircleIcon style={{ fontSize: 35, cursor: "pointer", float:"right" }} onClick={ () => this.removeDocumentRow(index)}/>
-                        </Grid>,
+                        return[<Grid item xs={1} key = {"doc_ctrl_" + index} style={{paddingTop: "14px"}} ></Grid>,
                         <Grid item xs={7} key = {"doc_" + index}>
-                          <FormControl className={ "width100percent " + classes.formControl}>
-                            <InputLabel id={"closure_" + index}>Document Type</InputLabel>
-                            <Select
-                              labelId={"closure_" + index}
-                              value={doc.documentType}
-                              onChange={this.handleClosureChange}
-                            >
-                              <MenuItem docindex = {index} value={''}>Select</MenuItem>
-                              <MenuItem docindex = {index} value={'birthSertificate'}>Birth Certificate</MenuItem>
-                              <MenuItem docindex = {index} value={'transferCertificate'}>Original copy of Transfer Certificate</MenuItem>
-                              <MenuItem docindex = {index} value={'parentsPhoto'}>Passport size photograph of parent.</MenuItem>
-                              <MenuItem docindex = {index} value={'aadhar'}>Photo copy of Aadhar</MenuItem>
-                            </Select>
-                          </FormControl>
+                          <LabelBox label="Document Type" value={ doc.documentType }/>
                       </Grid>,
                       <Grid item xs={4} key = {"doc_file_" + index}>
-                        <InputBase type="file" inputProps={{ 'aria-label': 'naked' }}/>
+                        <IconButton>
+                          <InsertDriveFileIcon/>
+                        </IconButton>
                       </Grid>];
                     } )}
                   </Grid>
