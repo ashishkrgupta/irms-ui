@@ -16,8 +16,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import classes from "./StudentDetails.module.css"
-import { STUDENTS_URL } from "../../../config";
-import axios from 'axios';
+import {IRMS_SERVICE} from '../../../servers'
 import Moment from 'moment';
 
 export default class AdmissionForm extends Component {
@@ -29,8 +28,7 @@ export default class AdmissionForm extends Component {
   }
 
   componentDidMount = () => {
-    console.log('component mounted ' + STUDENTS_URL + "/1");
-    axios.get(STUDENTS_URL + "/1").then(response => {
+    IRMS_SERVICE.get("/students/1").then(response => {
       console.log(response);
       this.setState({student: response.data});
     });

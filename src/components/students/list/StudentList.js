@@ -23,8 +23,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
 import StudentSearchBar from './StudentSearchBar'
 import classes from './StudentList.module.css'
-import Axios from "axios";
-import { STUDENTS_URL } from "../../../config";
+import {IRMS_SERVICE} from '../../../servers'
 
 export default class StudentList extends Component {
 
@@ -90,10 +89,11 @@ export default class StudentList extends Component {
     </Grid>);
   }
 
-  componentWillMount = () => {
-    Axios.get(STUDENTS_URL).then(
+  componentDidMount = () => {
+    IRMS_SERVICE.get("/students").then(
       resp => {
         console.log(resp.data);
+        //this.setState({allStudents: resp.data, students: resp.data})
       }, 
       error => {
         console.log(error);
@@ -162,7 +162,8 @@ export default class StudentList extends Component {
             </TableCell>
             <TableCell align="center" className="padding0px"></TableCell>
           </TableRow>
-          {this.state.students.map(student => (
+          { this.state.students ? 
+          this.state.students.map(student => (
             <TableRow key={student.id}>
               <TableCell align="center" component="th" scope="row">{student.enrollmentId}</TableCell>
               <TableCell align="center">{student.firstName}</TableCell>
@@ -176,7 +177,11 @@ export default class StudentList extends Component {
                 <IconButton><EditIcon/></IconButton>
               </TableCell>
             </TableRow>
-          ))}
+          )) 
+          :
+          <TableRow>
+            <TableCell align="center">No Record Found</TableCell>
+          </TableRow> }
         </TableBody>
       </Table>
     </TableContainer>
