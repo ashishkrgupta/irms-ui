@@ -39,7 +39,7 @@ export default class AdmissionForm extends Component {
 
     return (<Card>
               <CardHeader
-                style={{textAlign:"center", height:"25px"}}
+                style={{textAlign:"center", height:"25px", color: "#3f51b5"}}
                 title = {this.state.student.firstName + " " + this.state.student.middleName + " " + this.state.student.lastName}
                 titleTypographyProps = {{variant: "h5"}}
                 action={
@@ -52,7 +52,7 @@ export default class AdmissionForm extends Component {
                 />
               <CardContent>
                 <form noValidate autoComplete="off">
-                  <Typography variant="h5" component="h2">A. Student Information  </Typography>
+                  <Typography variant="h5" component="h2" style={{color: "#3f51b5"}}>A. Student Information  </Typography>
                   <Divider className={classes["margin-bottom10px"]}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     <Grid item xs={9}>
@@ -101,7 +101,7 @@ export default class AdmissionForm extends Component {
                       </Card>
                     </Grid>
                   </Grid>
-                  <Typography variant="h5" component="h2"  className="margintop20px">B. Parents/Guardian Information</Typography>
+                  <Typography variant="h5" component="h2"  className="margintop20px" style={{color: "#3f51b5"}}>B. Parents/Guardian Information</Typography>
                   <Divider  className={classes["margin-bottom10px"]}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     <Grid item xs={2}>
@@ -138,7 +138,7 @@ export default class AdmissionForm extends Component {
                       <LabelBox label="Email" value={this.state.student.email}/>
                     </Grid>
                   </Grid>
-                  <Typography className={"margintop20px " }>Residential Address</Typography>
+                  <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Residential Address</Typography>
                   <Divider className={classes["margin-bottom10px"] + ' ' + classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     <Grid item xs={6}>
@@ -160,7 +160,7 @@ export default class AdmissionForm extends Component {
                       <LabelBox label="Pin Code" value={ resAddr ? resAddr.pin : "" }/>
                     </Grid>
                   </Grid>
-                  <Typography className={"margintop20px " }>Correspondence Address</Typography>
+                  <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Correspondence Address</Typography>
                   <Divider  className={classes["margin-bottom10px"] + ' ' + classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                   <Grid item xs={6}>
@@ -182,7 +182,7 @@ export default class AdmissionForm extends Component {
                       <LabelBox label="Pin Code" value={ corAddr ? corAddr.pin : "" }/>
                     </Grid>
                   </Grid>
-                  <Typography className={"margintop20px " }>Emergency Contact</Typography>
+                  <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Emergency Contact</Typography>
                   <Divider  className={classes["margin-bottom10px"] + ' ' + classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     { this.state.student.emergencyContacts && this.state.student.emergencyContacts.map((contact, i) => {
@@ -197,7 +197,7 @@ export default class AdmissionForm extends Component {
                       </Grid>];
                     })}
                   </Grid>
-                  <Typography variant="h5" component="h2"  className="margintop20px">C. Enclosure  </Typography>
+                  <Typography variant="h5" component="h2"  className="margintop20px" style={{color: "#3f51b5"}}>C. Enclosure  </Typography>
                   <Divider  className={classes["margin-bottom10px"]}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     { this.state.student.documents && this.state.student.documents.map((doc, index) => {
