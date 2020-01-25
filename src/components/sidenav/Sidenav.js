@@ -80,14 +80,14 @@ class Sidenav extends Component {
                         id: "issue-book",
                         icon: <ArrowBackIcon/>,
                         selected: false,
-                        link: "/issue-book",
+                        link: "/library/issue",
                     },
                     {
                         title: "Return Book",
                         id: "return-book",
                         icon: <ArrowForwardIcon/>,
                         selected: false,
-                        link: "/return-book",
+                        link: "/library/return",
                     }
                 ]
             }
