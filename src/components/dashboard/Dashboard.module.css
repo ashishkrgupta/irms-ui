@@ -1,0 +1,13 @@
+.card {
+  margin: 10px;;
+  height: 300px;
+}
+
+.card-header {
+  font-size: 10px;;
+}
+
+.card-content {
+  background: #fbfbfd;
+  height: 100%;
+}

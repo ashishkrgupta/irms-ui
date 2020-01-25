@@ -139,7 +139,7 @@ export default class AdmissionForm extends Component {
                 />
               <CardContent>
                 <form noValidate autoComplete="off">
-                  <Typography variant="h5" component="h2">A. Student Information  </Typography>
+                  <Typography variant="h5" component="h2" style={{color: "#3f51b5"}}>A. Student Information  </Typography>
                   <Divider />
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     <Grid item xs={9}>
@@ -238,7 +238,7 @@ export default class AdmissionForm extends Component {
                       </Card>
                     </Grid>
                   </Grid>
-                  <Typography variant="h5" component="h2"  className="margintop20px">B. Parents/Guardian Information</Typography>
+                  <Typography variant="h5" component="h2" style={{color: "#3f51b5"}} className="margintop20px">B. Parents/Guardian Information</Typography>
                   <Divider />
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     <Grid item xs={2}>
@@ -281,7 +281,7 @@ export default class AdmissionForm extends Component {
                       <TextField className="width100percent" label="Email Address" />
                     </Grid>
                   </Grid>
-                  <Typography className={"margintop20px " }>Residential Address</Typography>
+                  <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Residential Address</Typography>
                   <Divider className={classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     <Grid item xs={6}>
@@ -309,7 +309,7 @@ export default class AdmissionForm extends Component {
                           inputProps={{ onChange:this.onFormInputChange, field: "resAddress.pin"}}/>
                     </Grid>
                   </Grid>
-                  <Typography className={"margintop20px " }>Correspondence Address</Typography>
+                  <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Correspondence Address</Typography>
                   <Divider className={classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     <Grid item xs={6}>
@@ -337,7 +337,7 @@ export default class AdmissionForm extends Component {
                           inputProps={{ onChange:this.onFormInputChange, field: "corAddress.pin"}}/>
                     </Grid>
                   </Grid>
-                  <Typography className={"margintop20px " }>Emergency Contact</Typography>
+                  <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Emergency Contact</Typography>
                   <Divider className={classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     {this.state.student.emergencyContacts.map((contact, i) => {
@@ -352,7 +352,7 @@ export default class AdmissionForm extends Component {
                       </Grid>];
                     })}
                   </Grid>
-                  <Typography variant="h5" component="h2"  className="margintop20px">C. Enclosure  </Typography>
+                  <Typography variant="h5" component="h2"  className="margintop20px" style={{color: "#3f51b5"}}>C. Enclosure  </Typography>
                   <Divider />
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                     { this.state.student.documents.map((doc, index) => {

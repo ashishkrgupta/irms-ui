@@ -45,7 +45,7 @@ export default class AdmissionForm extends Component {
                 titleTypographyProps = {{variant: "h5"}}
                 action={
                 <Link to={"/edit-student/" + this.state.student.enrollmentId}>
-                  <Button variant="contained" onClick={this.saveData} color="primary">
+                  <Button variant="contained" color="primary">
                     <EditIcon />
                     Edit
                   </Button>
