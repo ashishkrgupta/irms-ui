@@ -171,7 +171,7 @@ class Sidenav extends Component {
                             <List component="div" disablePadding>
                             {menu.submenus.map(submenu => {
                                 return(
-                                    <ListItem button disablePadding
+                                    <ListItem button
                                         selected={submenu.selected} 
                                         style={{padding:"0px"}}
                                         onClick={() => this.handleSubMenuClick(menu.id, submenu.id)} key={submenu.id}>

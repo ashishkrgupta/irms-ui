@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 import LabelBox from '../../common/LabelBox'
+import { Link } from 'react-router-dom';
 import classes from "./StudentDetails.module.css"
 import {IRMS_SERVICE} from '../../../servers'
 import Moment from 'moment';
@@ -43,11 +44,11 @@ export default class AdmissionForm extends Component {
                 title = {this.state.student.firstName + " " + this.state.student.middleName + " " + this.state.student.lastName}
                 titleTypographyProps = {{variant: "h5"}}
                 action={
-                <Button variant="contained" onClick={this.saveData} color="primary">
+                <Link to="/edit-student"><Button variant="contained" onClick={this.saveData} color="primary">
                   <EditIcon />
                   Edit
                 </Button>
-                  
+                </Link>
                 }
                 />
               <CardContent>
