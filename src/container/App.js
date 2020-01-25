@@ -32,10 +32,11 @@ export default class App extends Component {
             <Switch>
               <Route exact path="/"  component={Dashboard}/>
               <Route exact path="/new-student" component={AdmissionForm}/>
-              <Route exact path="/edit-student" component={AdmissionForm}/>
+              <Route exact path="/edit-student/:id" component={AdmissionForm}/>
               <Route exact path="/fee-receipt" component={FeeReceipt}/>
               <Route exact path="/student-list" component={StudentList}/>
               <Route exact path="/student-detail" component={StudentDetails}/>
+              <Route exact path="/student-detail/:id" component={StudentDetails}/>
               
             </Switch>
           </Container>

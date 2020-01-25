@@ -15,6 +15,7 @@ import InputBase from '@material-ui/core/InputBase';
 import StudentSearchBar from './StudentSearchBar'
 import classes from './StudentList.module.css'
 import {IRMS_SERVICE} from '../../../servers'
+import { Link } from 'react-router-dom';
 
 export default class StudentList extends Component {
 
@@ -163,8 +164,8 @@ export default class StudentList extends Component {
               <TableCell align="center">{student.section}</TableCell>
               <TableCell align="center">{student.rollNo}</TableCell>
               <TableCell align="center" className="padding0px" style={{width:"100px", height:"52px", display:"flex"}}>
-                <IconButton><VisibilityIcon/></IconButton>
-                <IconButton><EditIcon/></IconButton>
+                <Link to={"/student-detail/" + student.enrollmentId}><IconButton><VisibilityIcon/></IconButton></Link>
+                <Link to={"/edit-student/" + student.enrollmentId}><IconButton><EditIcon/></IconButton></Link>
               </TableCell>
             </TableRow>
           )) 

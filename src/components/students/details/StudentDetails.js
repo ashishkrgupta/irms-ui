@@ -44,10 +44,11 @@ export default class AdmissionForm extends Component {
                 title = {this.state.student.firstName + " " + this.state.student.middleName + " " + this.state.student.lastName}
                 titleTypographyProps = {{variant: "h5"}}
                 action={
-                <Link to="/edit-student"><Button variant="contained" onClick={this.saveData} color="primary">
-                  <EditIcon />
-                  Edit
-                </Button>
+                <Link to={"/edit-student/" + this.state.student.enrollmentId}>
+                  <Button variant="contained" onClick={this.saveData} color="primary">
+                    <EditIcon />
+                    Edit
+                  </Button>
                 </Link>
                 }
                 />
