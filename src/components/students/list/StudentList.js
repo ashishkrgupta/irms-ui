@@ -24,6 +24,8 @@ export default class StudentList extends Component {
   }
 
   state = {
+    currentPage: 0,
+    rowsPerPage: 10,
     students : [],
     allStudents : [{
       id: 1, enrollmentId:"1",
@@ -68,14 +70,8 @@ export default class StudentList extends Component {
     this.setState({students: filtered});
   }
 
-  render = () => {
-    return (<Grid container direction="row" justify="flex-start" alignItems="center">
-      <StudentSearchBar
-        //onChange={this.onChangeSearhBar}
-        onSearchClick={this.onChangeSearhBar}
-      />
-      {this.renderTable()}
-    </Grid>);
+  handleChangePage = () => {
+
   }
 
   componentDidMount = () => {
@@ -87,6 +83,18 @@ export default class StudentList extends Component {
       error => {
         console.log(error);
       });
+  }
+
+  render = () => {
+    return (
+      <Grid container direction="row" justify="flex-start" alignItems="center">
+        <StudentSearchBar
+          //onChange={this.onChangeSearhBar}
+          onSearchClick={this.onChangeSearhBar}
+        />
+        { this.renderTable() }
+      </Grid>
+    );
   }
 
   renderTable = () => {
@@ -171,9 +179,9 @@ export default class StudentList extends Component {
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
         count={this.state.students.length}
-        rowsPerPage={10}
-        page={0}
-        //onChangePage={handleChangePage}
+        rowsPerPage={this.state.rowsPerPage}
+        page={this.state.currentPage}
+        onChangePage={this.handleChangePage}
         //onChangeRowsPerPage={handleChangeRowsPerPage}
       />
     </Paper>);

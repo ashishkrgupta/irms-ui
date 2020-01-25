@@ -17,6 +17,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import { Link } from 'react-router-dom';
 import classes from './Sidenav.module.css'
 
 class Sidenav extends Component {
@@ -29,6 +30,7 @@ class Sidenav extends Component {
                 icon: <DashboardIcon/>,
                 submenus: [],
                 selected: false,
+                link: "/",
             },
             {
                 title: "Students",
@@ -41,18 +43,21 @@ class Sidenav extends Component {
                         id: "new-admission",
                         icon: <PersonAddIcon/>,
                         selected: false,
+                        link: "/new-student",
                     },
                     {
                         title: "Student List",
                         id: "student-list",
                         icon: <DnsIcon/>,
                         selected: false,
+                        link: "/student-list",
                     },
                     {
                         title: "Student Detail",
                         id: "student-detail",
                         icon: <DnsIcon/>,
-                        selected: true,
+                        selected: false,
+                        link: "/student-detail",
                     }
                 ]
             },
@@ -67,6 +72,7 @@ class Sidenav extends Component {
                         id: "fee-receipt",
                         icon: <ReceiptIcon/>,
                         selected: false,
+                        link: "/fee-receipt",
                     }
                 ]
             },
@@ -81,12 +87,14 @@ class Sidenav extends Component {
                         id: "issue-book",
                         icon: <ArrowBackIcon/>,
                         selected: false,
+                        link: "/issue-book",
                     },
                     {
                         title: "Return Book",
                         id: "return-book",
                         icon: <ArrowForwardIcon/>,
                         selected: false,
+                        link: "/return-book",
                     }
                 ]
             }
@@ -129,6 +137,14 @@ class Sidenav extends Component {
 
 
     render() {
+
+        let linkStyle = {
+            textDecoration: "none",
+            width: "100%",
+            display: "flex",
+            color: "#4d4d4d",
+            padding: "8px 10px 8px 30px",
+        };
         return (<Drawer
             className={classes.drawer}
             variant="permanent"
@@ -137,24 +153,32 @@ class Sidenav extends Component {
             }}
             >
                 {this.state.menus.map(menu => {
-                    return(<List component="nav" key={menu.id}className="padding0px">
+                    return(<List component="nav" key={menu.id} className="padding0px">
                         <ListItem 
                             button 
+                            style={ menu.submenus.length === 0 ? {padding:"0px"} : {} }
                             selected={menu.selected}
                             onClick={() => this.handleMenuClick(menu.id)} >
-                            <ListItemIcon>{menu.icon}</ListItemIcon>
+                            {menu.submenus.length === 0 && (<Link to={menu.link} style={{...linkStyle, padding:"8px 16px"}}>
+                                <ListItemIcon style={{minWidth: '30px'}}>{menu.icon}</ListItemIcon>
                             <ListItemText primary={menu.title} />
+                            </Link>)}
+                            {menu.submenus.length > 0 && [<ListItemIcon key="1" style={{minWidth: '30px'}}>{menu.icon}</ListItemIcon>,
+                            <ListItemText key="2" primary={menu.title} />]}
                             { menu.submenus.length > 0 && ( menu.open ? <ExpandLess /> : <ExpandMore />)}
                         </ListItem>
                         <Collapse in={menu.open} timeout="auto" unmountOnExit>
                             <List component="div" disablePadding>
                             {menu.submenus.map(submenu => {
                                 return(
-                                    <ListItem button
+                                    <ListItem button disablePadding
                                         selected={submenu.selected} 
-                                        onClick={() => this.handleSubMenuClick(menu.id, submenu.id)}  className="paddingleft30px" key={submenu.id}>
-                                        <ListItemIcon>{submenu.icon}</ListItemIcon>
-                                        <ListItemText primary={submenu.title} />
+                                        style={{padding:"0px"}}
+                                        onClick={() => this.handleSubMenuClick(menu.id, submenu.id)} key={submenu.id}>
+                                        <Link to={submenu.link} style = {linkStyle}>
+                                        <ListItemIcon style={{minWidth: '30px'}}>{submenu.icon}</ListItemIcon>
+                                        <ListItemText primary={submenu.title}/>
+                                        </Link>
                                     </ListItem>
                                 );
                             })}
@@ -163,11 +187,8 @@ class Sidenav extends Component {
                         <Divider/>
                     </List>);
                 })}
-
-                
             </Drawer>
         );
     }
 }
-
 export default Sidenav;

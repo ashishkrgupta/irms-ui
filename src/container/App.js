@@ -8,6 +8,7 @@ import FeeReceipt from '../components/feereceipt/FeeReceipt';
 import Dashboard from '../components/dashboard/Dashboard'
 import StudentList from '../components/students/list/StudentList'
 import StudentDetails from "../components/students/details/StudentDetails"
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 export default class App extends Component {
   
@@ -23,17 +24,22 @@ export default class App extends Component {
 
   render() {
     return (
+      <BrowserRouter>
         <div className={classes.root}>
           <Header/>
           <Sidenav onSubMenuClick={this.handleSubMenuClick}/>
           <Container className={classes['main-container']} maxWidth={false}>
-            { this.state.selectedSubMenu === "new-admission" && <AdmissionForm/> }
-            { this.state.selectedSubMenu === "fee-receipt" && <FeeReceipt/> }
-            { this.state.selectedSubMenu === "dashboard" && <Dashboard/> }
-            { this.state.selectedSubMenu === "student-list" && <StudentList/> }
-            { this.state.selectedSubMenu === "student-detail" && <StudentDetails/> }
+            <Switch>
+              <Route exact path="/"  component={Dashboard}/>
+              <Route exact path="/new-student" component={AdmissionForm}/>
+              <Route exact path="/fee-receipt" component={FeeReceipt}/>
+              <Route exact path="/student-list" component={StudentList}/>
+              <Route exact path="/student-detail" component={StudentDetails}/>
+              
+            </Switch>
           </Container>
         </div>
+      </BrowserRouter>
       );
     }
 }
