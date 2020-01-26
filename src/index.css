@@ -42,3 +42,7 @@ code {
 .width100percent {
   width: 100%;
 }
+
+.active {
+  background-color: rgba(0, 0, 0, 0.14);
+}

@@ -17,7 +17,7 @@ import LibraryBooksIcon from '@material-ui/icons/LibraryBooks';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import classes from './Sidenav.module.css'
 
 class Sidenav extends Component {
@@ -29,7 +29,6 @@ class Sidenav extends Component {
                 id: "dashboard",
                 icon: <DashboardIcon/>,
                 submenus: [],
-                selected: false,
                 link: "/",
             },
             {
@@ -42,14 +41,12 @@ class Sidenav extends Component {
                         title: "New Admission",
                         id: "new-admission",
                         icon: <PersonAddIcon/>,
-                        selected: false,
                         link: "/new-student",
                     },
                     {
                         title: "Student List",
                         id: "student-list",
                         icon: <DnsIcon/>,
-                        selected: false,
                         link: "/student-list",
                     }
                 ]
@@ -64,7 +61,6 @@ class Sidenav extends Component {
                         title: "Fee Receipt",
                         id: "fee-receipt",
                         icon: <ReceiptIcon/>,
-                        selected: false,
                         link: "/fee-receipt",
                     }
                 ]
@@ -79,14 +75,12 @@ class Sidenav extends Component {
                         title: "Issue Book",
                         id: "issue-book",
                         icon: <ArrowBackIcon/>,
-                        selected: false,
                         link: "/library/issue",
                     },
                     {
                         title: "Return Book",
                         id: "return-book",
                         icon: <ArrowForwardIcon/>,
-                        selected: false,
                         link: "/library/return",
                     }
                 ]
@@ -98,36 +92,11 @@ class Sidenav extends Component {
         console.log(menuId);
         let menus = [...this.state.menus];
         let menu = menus.find(m => {return m.id === menuId});
-        if (menu.selected !== undefined) {
-            this.resetSelectedMenus(menus);
-            menu.selected = true;
-            this.props.onSubMenuClick(menuId);
-        }
         if (menu.open !== undefined) {
             menu.open = !menu.open;
-        }
-        
+        } 
         this.setState({menus: menus});
     }
-
-    handleSubMenuClick = (menuId, submenuId) => {
-        let menus = [...this.state.menus];
-        this.resetSelectedMenus(menus);
-        let menu = menus.find(m => {return m.id === menuId});
-        let submenu = menu.submenus.find(m => {return m.id === submenuId});
-        submenu.selected = true;
-        this.setState({menus: menus});
-        this.props.onSubMenuClick(submenuId);
-    }
-
-    resetSelectedMenus = (menus) =>{
-        menus.forEach(menu => {
-            if(menu.selected) {menu.selected = false;}
-            menu.submenus.forEach(submenu => { if(submenu.selected){submenu.selected = false;}});
-        });
-    }
-
-
 
     render() {
 
@@ -150,12 +119,11 @@ class Sidenav extends Component {
                         <ListItem 
                             button 
                             style={ menu.submenus.length === 0 ? {padding:"0px"} : {} }
-                            selected={menu.selected}
                             onClick={() => this.handleMenuClick(menu.id)} >
-                            {menu.submenus.length === 0 && (<Link to={menu.link} style={{...linkStyle, padding:"8px 16px"}}>
+                            {menu.submenus.length === 0 && (<NavLink to={menu.link} style={{...linkStyle, padding:"8px 16px"}}>
                                 <ListItemIcon style={{minWidth: '30px'}}>{menu.icon}</ListItemIcon>
                             <ListItemText primary={menu.title} />
-                            </Link>)}
+                            </NavLink>)}
                             {menu.submenus.length > 0 && [<ListItemIcon key="1" style={{minWidth: '30px'}}>{menu.icon}</ListItemIcon>,
                             <ListItemText key="2" primary={menu.title} />]}
                             { menu.submenus.length > 0 && ( menu.open ? <ExpandLess /> : <ExpandMore />)}
@@ -165,13 +133,13 @@ class Sidenav extends Component {
                             {menu.submenus.map(submenu => {
                                 return(
                                     <ListItem button
-                                        selected={submenu.selected} 
                                         style={{padding:"0px"}}
-                                        onClick={() => this.handleSubMenuClick(menu.id, submenu.id)} key={submenu.id}>
-                                        <Link to={submenu.link} style = {linkStyle}>
+                                        //onClick={() => this.handleSubMenuClick(menu.id, submenu.id)} 
+                                        key={submenu.id} >
+                                        <NavLink to={submenu.link} style = {linkStyle}>
                                         <ListItemIcon style={{minWidth: '30px'}}>{submenu.icon}</ListItemIcon>
                                         <ListItemText primary={submenu.title}/>
-                                        </Link>
+                                        </NavLink>
                                     </ListItem>
                                 );
                             })}
