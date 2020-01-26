@@ -32,7 +32,7 @@ export default class App extends Component {
           <Sidenav onSubMenuClick={this.handleSubMenuClick}/>
           <Container className={classes['main-container']} maxWidth={false}>
             <Switch>
-              <Route exact path="/"  component={Dashboard}/>
+              <Route exact path="/dashboard"  component={Dashboard}/>
               <Route exact path="/new-student" component={AdmissionForm}/>
               <Route exact path="/edit-student/:id" component={AdmissionForm}/>
               <Route exact path="/fee-receipt" component={FeeReceipt}/>

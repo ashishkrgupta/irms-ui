@@ -29,7 +29,7 @@ class Sidenav extends Component {
                 id: "dashboard",
                 icon: <DashboardIcon/>,
                 submenus: [],
-                link: "/",
+                link: "/dashboard",
             },
             {
                 title: "Students",
