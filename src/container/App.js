@@ -23,19 +23,17 @@ export default class App extends Component {
   }
 
   preRequest = (request) => {
-    console.log("pre", request);
     this.setState({loader:"block"});
     return request;
   }
 
   postResponse = (response) => {
-    console.log("post", response);
     this.setState({loader:"none"});
     return response;
   }
 
   errorInterceptor = (response) => {
-    console.log("post", response);
+    this.setState({loader:"none"});
     return response;
   }
   
@@ -45,7 +43,6 @@ export default class App extends Component {
   };
 
   handleSubMenuClick = (subMenuId) => {
-    //console.log(subMenuId);
     this.setState({selectedSubMenu: subMenuId});
   }
 

@@ -16,6 +16,7 @@ import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import Moment from 'moment';
 
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -105,7 +106,7 @@ export default class AdmissionForm extends Component {
 
   onDOBChange = (date, dateStr) => {
     let student = {...this.state.student};
-    student.dateOfBirth = dateStr;
+    student.dateOfBirth = Moment(date).format('d/MM/YYYY');
     this.setState({student});
   }
 
@@ -126,7 +127,20 @@ export default class AdmissionForm extends Component {
     );
    }
 
-  componentDidUpdate = () => {
+
+
+  componentDidMount = () => {
+    console.log(this.props);
+    if (this.props.location && this.props.location.pathname.indexOf("edit-student") > -1) {
+      let stdId = this.props.match.params.id;
+      IRMS_SERVICE.get("/students/" + stdId).then(response => {
+        console.log(response);
+        if(response) {
+          response.data.dateOfBirth = Moment(response.data.dateOfBirth).format('d/MM/YYYY');
+          this.setState({student: response.data});
+        }
+      });
+    }
     //console.log(this.state.student);
   }
 
@@ -145,8 +159,10 @@ export default class AdmissionForm extends Component {
                     <Grid item xs={9}>
                     <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="First Name" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "firstName"}}
+                        <TextField className="width100percent" label="First Name"
+                          value={ this.state.student.firstName}
+                          onChange= {this.onFormInputChange}
+                          inputProps={{ field: "firstName"}}
                         />
                       </Grid>
                       <Grid item xs={4}>

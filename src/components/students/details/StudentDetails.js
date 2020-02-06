@@ -25,9 +25,14 @@ export default class AdmissionForm extends Component {
   }
 
   componentDidMount = () => {
-    IRMS_SERVICE.get("/students/1").then(response => {
+    console.log(this.props)
+    let studentId = this.props.match.params.id;
+    IRMS_SERVICE.get("/students/" + studentId).then(response => {
       console.log(response);
-      this.setState({student: response.data});
+      if(response) {
+        this.setState({student: response.data});
+      }
+      
     });
   }
 
@@ -44,7 +49,7 @@ export default class AdmissionForm extends Component {
                 title = {this.state.student.firstName + " " + this.state.student.middleName + " " + this.state.student.lastName}
                 titleTypographyProps = {{variant: "h5"}}
                 action={
-                <Link to={"/edit-student/" + this.state.student.enrollmentId}>
+                <Link to={"/edit-student/" + this.state.student.id}>
                   <Button variant="contained" color="primary">
                     <EditIcon />
                     Edit

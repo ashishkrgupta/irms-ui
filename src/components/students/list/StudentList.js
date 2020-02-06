@@ -2,12 +2,14 @@ import React, { Component } from "react"
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import BackspaceIcon from '@material-ui/icons/Backspace';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
+import Tooltip from '@material-ui/core/Tooltip';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
+import Zoom from '@material-ui/core/Zoom';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
@@ -28,30 +30,9 @@ export default class StudentList extends Component {
     currentPage: 0,
     rowsPerPage: 10,
     students : [],
-    allStudents : [{
-      id: 1, enrollmentId:"1",
-      firstName: "Ashish",
-      middleName: "Kumar",
-      lastName: "Gupta"
-    },
-    { id: 2, enrollmentId:"2", firstName: "Ajay", middleName: "Kumar", lastName: "Singh" },
-    { id: 3, enrollmentId:"3", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
-    { id: 4, enrollmentId:"4", firstName: "Ramesh", middleName: "Kumar", lastName: "Pandey" },
-    { id: 5, enrollmentId:"5", firstName: "Deepak", middleName: "", lastName: "Chaudhary" },
-    { id: 6, enrollmentId:"6", firstName: "Aashik", middleName: "", lastName: "Manandhar" },
-    { id: 7, enrollmentId:"7", firstName: "Manish", middleName: "Kumar", lastName: "" },
-    { id: 8, enrollmentId:"8", firstName: "Chirag", middleName: "", lastName: "Joshi" },
-    { id: 9, enrollmentId:"9", firstName: "Utsav", middleName: "Bhai", lastName: "Mehta" },
-    { id: 10, enrollmentId:"10", firstName: "Bhavdip", middleName: "", lastName: "Bhalodia" },
-    { id: 11, enrollmentId:"11", firstName: "Jagan", middleName: "", lastName: "Siddhpura" },
-    { id: 12, enrollmentId:"12", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
-    { id: 13, enrollmentId:"13", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
-    { id: 14, enrollmentId:"14", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
-    { id: 15, enrollmentId:"15", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
-    { id: 16, enrollmentId:"16", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
-    { id: 17, enrollmentId:"17", firstName: "Shweta", middleName: "", lastName: "Siddhpura" },
-    { id: 18, enrollmentId:"18", firstName: "Shweta", middleName: "", lastName: "Siddhpura" }],
+    allStudents : [],
     selectedStudent: null,
+    filter:{enrollmentId:"",firstName:"",middleName:"",lastName:"",class:"",section:"",rollNo:""},
   };
 
   onChangeSearhBar = (option) => {
@@ -65,13 +46,27 @@ export default class StudentList extends Component {
   onFilterInputChange = (event) => {
     let key = event.target.getAttribute('field');
     let allStudents = [...this.state.allStudents];
-    let filtered = allStudents.filter(std => { 
-      //  console.log(std[key]);
-      return (std[key] + "").toLowerCase().indexOf(event.target.value.toLowerCase()) > -1 ; });
-    this.setState({students: filtered});
+    let filter = {...this.state.filter};
+    filter[key] = event.target.value;
+
+    let filteredStudent = allStudents.filter(std => { 
+      return std.enrollmentId.toLowerCase().indexOf(filter.enrollmentId.toLowerCase()) > -1
+            && std.firstName.toLowerCase().indexOf(filter.firstName.toLowerCase()) > -1
+            && std.middleName.toLowerCase().indexOf(filter.middleName.toLowerCase()) > -1 
+            && std.lastName.toLowerCase().indexOf(filter.lastName.toLowerCase()) > -1 
+          /*  && std.class && std.class.toLowerCase().indexOf(filter.class.toLowerCase()) > -1 
+            && std.section && std.section.toLowerCase().indexOf(filter.section.toLowerCase()) > -1 
+            && std.rollNo && std.rollNo.toLowerCase().indexOf(filter.rollNo.toLowerCase()) > -1 */ ; 
+    });
+
+    this.setState({students: filteredStudent, filter});
   }
 
   handleChangePage = () => {
+    
+  }
+
+  componentDidUpdate = () => {
 
   }
 
@@ -79,11 +74,15 @@ export default class StudentList extends Component {
     IRMS_SERVICE.get("/students").then(
       resp => {
         console.log(resp.data);
-        //this.setState({allStudents: resp.data, students: resp.data})
+        this.setState({allStudents: resp.data, students: resp.data})
       }, 
       error => {
         console.log(error);
       });
+  }
+
+  resetFilter = () => {
+    this.setState({students:this.state.allStudents, filter:{enrollmentId:"",firstName:"",middleName:"",lastName:"",class:"",section:"",rollNo:""}})
   }
 
   render = () => {
@@ -118,54 +117,69 @@ export default class StudentList extends Component {
           <TableRow>
             <TableCell align="center" className="padding0px">
               <InputBase className="width100percent"
+                value={this.state.filter.enrollmentId}
                 inputProps={{ onChange:this.onFilterInputChange, field: "enrollmentId", placeholder:"enrollment id", style:{textAlign:"center"}}}
               />
             </TableCell>
             <TableCell align="center" className="padding0px">
               <InputBase className="width100percent" 
+                value={this.state.filter.firstName}
                 inputProps={{ onChange:this.onFilterInputChange, field: "firstName", placeholder:"first name", style:{textAlign:"center"}}}
               />
             </TableCell>
             <TableCell align="center" className="padding0px">
               <InputBase className="width100percent" 
+                value={this.state.filter.middleName}
                 inputProps={{ onChange:this.onFilterInputChange, field: "middleName", placeholder:"middle name", style:{textAlign:"center"}}}
               />
             </TableCell>
             <TableCell align="center" className="padding0px">
               <InputBase className="width100percent" 
+                value={this.state.filter.lastName}
                 inputProps={{ onChange:this.onFilterInputChange, field: "lastName", placeholder:"last name", style:{textAlign:"center"}}}
               />
             </TableCell>
             <TableCell align="center" className="padding0px">
               <InputBase className="width100percent" 
+                value={this.state.filter.class}
                 inputProps={{ onChange:this.onFilterInputChange, field: "class", placeholder:"class", style:{textAlign:"center"}}}
               />
             </TableCell>
             <TableCell align="center" className="padding0px">
               <InputBase className="width100percent" 
+                value={this.state.filter.section}
                 inputProps={{ onChange:this.onFilterInputChange, field: "section", placeholder:"section", style:{textAlign:"center"}}}
               />
             </TableCell>
             <TableCell align="center" className="padding0px">
               <InputBase className="width100percent" 
+                value={this.state.filter.rollNo}
                 inputProps={{ onChange:this.onFilterInputChange, field: "rollNo", placeholder:"roll no", style:{textAlign:"center"}}}
               />
             </TableCell>
-            <TableCell align="center" className="padding0px"></TableCell>
+            <TableCell align="center" className="padding0px">
+              <Tooltip title="Reset Filter"  placement="top" TransitionComponent={Zoom} >
+                <IconButton style={{padding: "0px"}} onClick={this.resetFilter}>
+                  <BackspaceIcon/>
+                </IconButton>
+              </Tooltip>
+            </TableCell>
           </TableRow>
           { this.state.students ? 
           this.state.students.map(student => (
             <TableRow key={student.id}>
-              <TableCell align="center" component="th" scope="row">{student.enrollmentId}</TableCell>
+              <TableCell align="center">
+                <Link to={"/student-detail/" + student.id} style={{textDecoration:"none", color:"#3f51b5"}}>{student.enrollmentId}</Link>
+              </TableCell>
               <TableCell align="center">{student.firstName}</TableCell>
               <TableCell align="center">{student.middleName}</TableCell>
               <TableCell align="center">{student.lastName}</TableCell>
               <TableCell align="center">{student.class}</TableCell>
               <TableCell align="center">{student.section}</TableCell>
               <TableCell align="center">{student.rollNo}</TableCell>
-              <TableCell align="center" className="padding0px" style={{width:"100px", height:"52px", display:"flex"}}>
-                <Link to={"/student-detail/" + student.enrollmentId}><IconButton><VisibilityIcon/></IconButton></Link>
-                <Link to={"/edit-student/" + student.enrollmentId}><IconButton><EditIcon/></IconButton></Link>
+              <TableCell align="center" className="padding0px" >
+                
+                <Link to={"/edit-student/" + student.id}><IconButton><EditIcon/></IconButton></Link>
               </TableCell>
             </TableRow>
           )) 
