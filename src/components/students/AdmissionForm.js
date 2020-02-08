@@ -26,33 +26,63 @@ import {
 } from '@material-ui/pickers';
 import classes from "./AdmissionForm.module.css"
 import { IRMS_SERVICE } from "../../servers";
+import AddressForm from "../common/AddressForm";
+import {bloodGropupOptions, religionOptions, genderOptions } from '../common/OptionConfig'
 
 export default class AdmissionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       student: {
-        bloodGroup: "",
-        gender:"",
-        father: {},
-        mother: {},
-        resAddress: {},
-        corAddress:{},
-        documents:[{
-          documentType:"",
-          filename:""
-        }],
-        emergencyContacts:[{
-            contactNumber:"",
-            personName:"",
-            relationWithStudent:""
-          },
+        aadharNumber: "string",
+        addmissionDate: "2020-02-06T13:49:00.501Z",
+        addmissionStandard: "string",
+        addressList: [
           {
-            contactNumber:"",
-            personName:"",
-            relationWithStudent:""
+            addressType: "string",
+            city: "string",
+            country: "string",
+            line1: "string",
+            line2: "string",
+            pin: "string",
+            state: "string"
           }
-        ]
+        ],
+        bloodGroup: "",
+        community: "string",
+        dateOfBirth: "2020-02-06T13:49:00.501Z",
+        documents: [
+          {
+            documentType: "",
+            fileName: "string"
+          }
+        ],
+        emailId: "string",
+        emergencyContacts: [
+          {
+            contactNumber: "string",
+            personName: "string",
+            relationWithStudent: "string"
+          }
+        ],
+        enrollmentId: "string",
+        firstName: "string",
+        gender: "",
+        id: 0,
+        languageKnown: "string",
+        lastName: "string",
+        leavingDate: "2020-02-06T13:49:00.501Z",
+        middleName: "string",
+        nationality: "string",
+        relatives: [
+          {
+            firstName: "string",
+            lastName: "string",
+            middleName: "string",
+            relation: "string"
+          }
+        ],
+        religion: ""
       }
     }
   }
@@ -102,6 +132,12 @@ export default class AdmissionForm extends Component {
     let student = {...this.state.student};
     student.documents[child.props.docindex].documentType = event.target.value;
     this.setState({student});
+  }
+
+  onAddressChange = (address) => {
+    let addresses = [...this.state.student.addressList]
+    let addr = addresses.find(a => a.addressType.indexOf(address.addressType) >= 0);
+    console.log(address);
   }
 
   onDOBChange = (date, dateStr) => {
@@ -182,30 +218,20 @@ export default class AdmissionForm extends Component {
                             value={this.state.student.bloodGroup}
                             onChange={this.onFormInputChange}
                           >
-                            <MenuItem value={''} field="bloodGroup">Select</MenuItem>
-                            <MenuItem value={'a+'} field="bloodGroup">A+ve</MenuItem>
-                            <MenuItem value={'a-'} field="bloodGroup">A-ve</MenuItem>
-                            <MenuItem value={'b+'} field="bloodGroup">B+ve</MenuItem>
-                            <MenuItem value={'b-'} field="bloodGroup">B-ve</MenuItem>
-                            <MenuItem value={'o+'} field="bloodGroup">O+ve</MenuItem>
-                            <MenuItem value={'o-'} field="bloodGroup">O-ve</MenuItem>
-                            <MenuItem value={'ab+'} field="bloodGroup">AB+ve</MenuItem>
-                            <MenuItem value={'ab-'} field="bloodGroup">AB-ve</MenuItem>
+                            {bloodGropupOptions.map(option => <MenuItem key={option.id} value={option.id} field="bloodGroup">{option.text}</MenuItem>)}
                           </Select>
                         </FormControl>
                       </Grid>
                       <Grid item xs={4}>
                         <FormControl className={ "width100percent " + classes.formControl}>
-                          <InputLabel id="demo-simple-select-label">Gender</InputLabel>
+                          <InputLabel id="gender-select-label">Gender</InputLabel>
                           <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
+                            labelId="gender-select-label"
+                            id="gender-select"
                             value={this.state.student.gender}
                             onChange={this.onFormInputChange}
                           >
-                            <MenuItem value={''} field="gender">Select</MenuItem>
-                            <MenuItem value={'male'} field="gender">Male</MenuItem>
-                            <MenuItem value={'female'} field="gender">Female</MenuItem>
+                            {genderOptions.map(option => <MenuItem key={option.id} value={option.id} field="bloodGroup">{option.text}</MenuItem>)}
                           </Select>
                         </FormControl>
                       </Grid>
@@ -229,8 +255,17 @@ export default class AdmissionForm extends Component {
                           inputProps={{ onChange:this.onFormInputChange, field: "nationality"}}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Religion" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "religion"}}/>
+                        <FormControl className={ "width100percent " }>
+                          <InputLabel id="religion-select">Religion</InputLabel>
+                          <Select
+                            labelId="religion-select"
+                            field="bloodGroup"
+                            value={this.state.student.religion}
+                            onChange={this.onFormInputChange}
+                          >
+                            {religionOptions.map(option => <MenuItem key={option.id} value={option.id} field="religion">{option.text}</MenuItem>)}
+                          </Select>
+                        </FormControl>
                       </Grid>
                       <Grid item xs={4}>
                         <TextField className="width100percent" label="Community" 
@@ -238,7 +273,7 @@ export default class AdmissionForm extends Component {
                       </Grid>
                       <Grid item xs={4}>
                         <TextField className="width100percent" label="Aadhar No" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "aadharNo"}}/>
+                          inputProps={{ onChange:this.onFormInputChange, field: "aadharNumber"}}/>
                       </Grid>
                       <Grid item xs={4}>
                         <TextField className="width100percent" label="Language Known" 
@@ -297,62 +332,15 @@ export default class AdmissionForm extends Component {
                       <TextField className="width100percent" label="Email Address" />
                     </Grid>
                   </Grid>
-                  <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Residential Address</Typography>
-                  <Divider className={classes.width25percent}/>
-                  <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    <Grid item xs={6}>
-                      <TextField className="width100percent" label="Address Line 1" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "resAddress.line1"}}/>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <TextField className="width100percent" label="Address Line 2" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "resAddress.line2"}}/>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <TextField className="width100percent" label="City" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "resAddress.city"}}/>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <TextField className="width100percent" label="State/Provience" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "resAddress.state"}}/>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <TextField className="width100percent" label="Country" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "resAddress.country"}}/>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <TextField className="width100percent" label="Pin Code" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "resAddress.pin"}}/>
-                    </Grid>
-                  </Grid>
-                  <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Correspondence Address</Typography>
-                  <Divider className={classes.width25percent}/>
-                  <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    <Grid item xs={6}>
-                      <TextField className="width100percent" label="Address Line 1" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "corAddress.line1"}}/>
-                    </Grid>
-                    <Grid item xs={6}>
-                      <TextField className="width100percent" label="Address Line 2" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "corAddress.line2"}}/>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <TextField className="width100percent" label="City" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "corAddress.city"}}/>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <TextField className="width100percent" label="State/Provience" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "corAddress.state"}}/>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <TextField className="width100percent" label="Country" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "corAddress.country"}}/>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <TextField className="width100percent" label="Pin Code" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "corAddress.pin"}}/>
-                    </Grid>
-                  </Grid>
+                  <AddressForm
+                    title="Residential Address"
+                    onChange={this.onAddressChange}
+                  />
+                  <AddressForm
+                    title="Correspondence Address"
+                    onChange={this.onAddressChange}
+                  />
+                  
                   <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Emergency Contact</Typography>
                   <Divider className={classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
