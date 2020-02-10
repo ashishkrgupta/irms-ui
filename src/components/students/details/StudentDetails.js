@@ -9,18 +9,30 @@ import CardHeader from '@material-ui/core/CardHeader';
 import EditIcon from '@material-ui/icons/Edit';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import VisibilityIcon from '@material-ui/icons/Visibility';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Slide from '@material-ui/core/Slide';
 import LabelBox from '../../common/LabelBox'
 import { Link } from 'react-router-dom';
 import classes from "./StudentDetails.module.css"
 import {IRMS_SERVICE} from '../../../servers'
 import Moment from 'moment';
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export default class AdmissionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      student: { }
+      student: { },
+      docDialogOpen: false,
+      docDialogTitle: "",
+      docDialogImgSource:"",
     }
   }
 
@@ -34,6 +46,10 @@ export default class AdmissionForm extends Component {
       }
       
     });
+  }
+
+  handleDialogClose = () => {
+    this.setState({docDialogOpen: false, docDialogTitle:"", docDialogImgSource:""});
   }
 
   render() {
@@ -93,7 +109,7 @@ export default class AdmissionForm extends Component {
                         <LabelBox label="Community" value={this.state.student.community}/>
                       </Grid>
                       <Grid item xs={4}>
-                        <LabelBox label="Aadhar Number" value={this.state.student.aadharNo}/>
+                        <LabelBox label="Aadhar Number" value={this.state.student.aadharNumber}/>
                       </Grid>
                       <Grid item xs={4}>
                         <LabelBox label="Language Known" value={this.state.student.languageKnown}/>
@@ -213,14 +229,30 @@ export default class AdmissionForm extends Component {
                           <LabelBox label="Document Type" value={ doc.documentType }/>
                       </Grid>,
                       <Grid item xs={4} key = {"doc_file_" + index}>
+                        <IconButton onClick={()=> this.setState({docDialogImgSource:"", docDialogOpen:true, docDialogTitle:"test"})}>
+                          <VisibilityIcon/>
+                        </IconButton>
                         <IconButton>
-                          <InsertDriveFileIcon/>
+                          <GetAppIcon/>
                         </IconButton>
                       </Grid>];
                     } )}
                   </Grid>
                 </form>
               </CardContent>
+              <Dialog
+                open={this.state.docDialogOpen}
+                TransitionComponent={Transition}
+                keepMounted
+                onClose={this.handleDialogClose}
+                aria-labelledby="alert-dialog-slide-title"
+                aria-describedby="alert-dialog-slide-description"
+              >
+                <DialogTitle id="alert-dialog-slide-title">{this.state.docDialogTitle}</DialogTitle>
+                <DialogContent>
+                  
+                </DialogContent>
+              </Dialog>
             </Card>);
   }
 

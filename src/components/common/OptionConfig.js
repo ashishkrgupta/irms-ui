@@ -26,3 +26,17 @@ export const genderOptions = [
   {id:"male", text:"Male"},
   {id:"female", text:"Female"}
 ];
+
+export const communityOptions = [
+  {id:"", text:"Select"},
+  {id:"general", text:"General"},
+  {id:"obc", text:"OBC"},
+  {id:"scst", text:"SC/ST"}
+];
+
+export const languageOptions = [
+  {id:"", text:"Select"},
+  {id:"hindi", text:"Hindi"},
+  {id:"english", text:"English"},
+  {id:"other", text:"Other"}
+];

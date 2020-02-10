@@ -22,10 +22,10 @@ export default class AddressForm extends Component {
     let addr = {...this.state.address};
     addr[field] = value;
     this.setState({address: addr});
+    this.props.onChange(this.state.address);
   }
 
   componentDidUpdate() {
-    this.props.onChange(this.state.address);
   }
 
   render() {

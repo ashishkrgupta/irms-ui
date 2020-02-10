@@ -16,6 +16,8 @@ import Select from '@material-ui/core/Select';
 import InputBase from '@material-ui/core/InputBase';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import Chip from '@material-ui/core/Chip';
+import Input from '@material-ui/core/Input';
 import Moment from 'moment';
 
 import 'date-fns';
@@ -27,37 +29,36 @@ import {
 import classes from "./AdmissionForm.module.css"
 import { IRMS_SERVICE } from "../../servers";
 import AddressForm from "../common/AddressForm";
-import {bloodGropupOptions, religionOptions, genderOptions } from '../common/OptionConfig'
+import {bloodGropupOptions, religionOptions, genderOptions, communityOptions, languageOptions } from '../common/OptionConfig'
 
 export default class AdmissionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       student: {
-        aadharNumber: "string",
-        addmissionDate: "2020-02-06T13:49:00.501Z",
-        addmissionStandard: "string",
+        aadharNumber: "",
+        addmissionStandard: "",
         addressList: [
           {
-            addressType: "string",
-            city: "string",
-            country: "string",
-            line1: "string",
-            line2: "string",
-            pin: "string",
-            state: "string"
+            addressType: "",
+            city: "",
+            country: "",
+            line1: "",
+            line2: "",
+            pin: "",
+            state: ""
           }
         ],
         bloodGroup: "",
-        community: "string",
-        dateOfBirth: "2020-02-06T13:49:00.501Z",
+        community: "",
+        dateOfBirth: "",
         documents: [
           {
             documentType: "",
-            fileName: "string"
+            fileName: ""
           }
         ],
-        emailId: "string",
+        emailId: "",
         emergencyContacts: [
           {
             contactNumber: "string",
@@ -65,21 +66,25 @@ export default class AdmissionForm extends Component {
             relationWithStudent: "string"
           }
         ],
-        enrollmentId: "string",
-        firstName: "string",
+        enrollmentId: "",
+        firstName: "",
         gender: "",
-        id: 0,
-        languageKnown: "string",
-        lastName: "string",
-        leavingDate: "2020-02-06T13:49:00.501Z",
-        middleName: "string",
-        nationality: "string",
+        languageKnown: [""],
+        lastName: "",
+        middleName: "",
+        nationality: "",
         relatives: [
           {
-            firstName: "string",
-            lastName: "string",
-            middleName: "string",
-            relation: "string"
+            firstName: "",
+            lastName: "",
+            middleName: "",
+            relation: "father"
+          },
+          {
+            firstName: "",
+            lastName: "",
+            middleName: "",
+            relation: "mother"
           }
         ],
         religion: ""
@@ -134,15 +139,21 @@ export default class AdmissionForm extends Component {
     this.setState({student});
   }
 
-  onAddressChange = (address) => {
-    let addresses = [...this.state.student.addressList]
-    let addr = addresses.find(a => a.addressType.indexOf(address.addressType) >= 0);
-    console.log(address);
+  onAddressChange = (address, index) => {
+    let student = {...this.state.student};
+    student.addressList[index] = address;
+    this.setState({student});
   }
 
   onDOBChange = (date, dateStr) => {
     let student = {...this.state.student};
     student.dateOfBirth = Moment(date).format('d/MM/YYYY');
+    this.setState({student});
+  }
+
+  updateRelativeDetails = (val, index, key) => {
+    let student = {...this.state.student};
+    student.relatives[index][key] = val;
     this.setState({student});
   }
 
@@ -203,10 +214,12 @@ export default class AdmissionForm extends Component {
                       </Grid>
                       <Grid item xs={4}>
                         <TextField className="width100percent" label="Middle Name"  
+                          value={ this.state.student.middleName}
                           inputProps={{ onChange:this.onFormInputChange, field: "middleName"}}/>
                       </Grid>
                       <Grid item xs={4}>
                         <TextField className="width100percent" label="Last Name"  
+                          value={ this.state.student.lastName}
                           inputProps={{ onChange:this.onFormInputChange, field: "lastName"}}/>
                       </Grid>
                       <Grid item xs={4}>
@@ -214,7 +227,6 @@ export default class AdmissionForm extends Component {
                           <InputLabel id="blood-group-select">Blood Group</InputLabel>
                           <Select
                             labelId="blood-group-select"
-                            field="bloodGroup"
                             value={this.state.student.bloodGroup}
                             onChange={this.onFormInputChange}
                           >
@@ -231,7 +243,7 @@ export default class AdmissionForm extends Component {
                             value={this.state.student.gender}
                             onChange={this.onFormInputChange}
                           >
-                            {genderOptions.map(option => <MenuItem key={option.id} value={option.id} field="bloodGroup">{option.text}</MenuItem>)}
+                            {genderOptions.map(option => <MenuItem key={option.id} value={option.id} field="gender">{option.text}</MenuItem>)}
                           </Select>
                         </FormControl>
                       </Grid>
@@ -259,7 +271,6 @@ export default class AdmissionForm extends Component {
                           <InputLabel id="religion-select">Religion</InputLabel>
                           <Select
                             labelId="religion-select"
-                            field="bloodGroup"
                             value={this.state.student.religion}
                             onChange={this.onFormInputChange}
                           >
@@ -268,15 +279,25 @@ export default class AdmissionForm extends Component {
                         </FormControl>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Community" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "community"}}/>
+                        <FormControl className={ "width100percent " }>
+                          <InputLabel id="community-select">Community</InputLabel>
+                          <Select
+                            labelId="community-select"
+                            value={this.state.student.community}
+                            onChange={this.onFormInputChange}
+                          >
+                            {communityOptions.map(option => <MenuItem key={option.id} value={option.id} field="community">{option.text}</MenuItem>)}
+                          </Select>
+                        </FormControl>
                       </Grid>
                       <Grid item xs={4}>
                         <TextField className="width100percent" label="Aadhar No" 
+                          value={ this.state.student.aadharNumber}
                           inputProps={{ onChange:this.onFormInputChange, field: "aadharNumber"}}/>
                       </Grid>
-                      <Grid item xs={4}>
+                      <Grid item xs={8}>
                         <TextField className="width100percent" label="Language Known" 
+                          value={ this.state.student.languageKnown}
                           inputProps={{ onChange:this.onFormInputChange, field: "languageKnown"}}/>
                       </Grid>
                     </Grid>
@@ -297,30 +318,37 @@ export default class AdmissionForm extends Component {
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="First Name" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "father.firstName"}}/>
+                          value={ this.state.student.relatives[0].firstName}
+                          onChange={ e => this.updateRelativeDetails(e.target.value, 0, 'firstName') }
+                          />
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="Middle Name" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "father.middleName"}}/>
+                          value={ this.state.student.relatives[0].middleName}
+                          onChange={ e => this.updateRelativeDetails(e.target.value, 0, 'middleName') }/>
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="Last Name" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "father.lastName"}}/>
+                          value={ this.state.student.relatives[0].lastName}
+                          onChange={ e => this.updateRelativeDetails(e.target.value, 0, 'lastName') }/>
                     </Grid>
                     <Grid item xs={2}>
                       <Typography color="textSecondary" className={classes.margintop15px} >Mother's Name</Typography>
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="First Name" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "mother.firstName"}}/>
+                          value={ this.state.student.relatives[1].firstName}
+                          onChange={ e => this.updateRelativeDetails(e.target.value, 1, 'firstName') }/>
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="Middle Name" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "mother.middleName"}}/>
+                          value={ this.state.student.relatives[1].middleName}
+                          onChange={ e => this.updateRelativeDetails(e.target.value, 1, 'middleName') }/>
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="Last Name" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "mother.lastName"}}/>
+                          value={ this.state.student.relatives[1].lastName}
+                          onChange={ e => this.updateRelativeDetails(e.target.value, 1, 'lastName') }/>
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="Mobile Number" />
@@ -329,16 +357,18 @@ export default class AdmissionForm extends Component {
                       <TextField className="width100percent" label="Phone Number" />
                     </Grid>
                     <Grid item xs={5}>
-                      <TextField className="width100percent" label="Email Address" />
+                      <TextField className="width100percent" label="Email Address"
+                          value={ this.state.student.emailId}
+                          inputProps={{ onChange:this.onFormInputChange, field: "emailId"}}/>
                     </Grid>
                   </Grid>
                   <AddressForm
                     title="Residential Address"
-                    onChange={this.onAddressChange}
+                    onChange={obj => this.onAddressChange(obj, 0)}
                   />
                   <AddressForm
                     title="Correspondence Address"
-                    onChange={this.onAddressChange}
+                    onChange={obj => this.onAddressChange(obj, 1)}
                   />
                   
                   <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Emergency Contact</Typography>
