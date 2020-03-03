@@ -29,9 +29,10 @@ export const genderOptions = [
 
 export const communityOptions = [
   {id:"", text:"Select"},
-  {id:"general", text:"General"},
+  {id:"general", text:"GEN"},
   {id:"obc", text:"OBC"},
-  {id:"scst", text:"SC/ST"}
+  {id:"scst", text:"SC/ST"},
+  {id:"other", text:"Other"}
 ];
 
 export const languageOptions = [
@@ -39,4 +40,10 @@ export const languageOptions = [
   {id:"hindi", text:"Hindi"},
   {id:"english", text:"English"},
   {id:"other", text:"Other"}
+];
+
+export const nationalityOptions = [
+  {id:"", text:"Select"},
+  {id:"india", text:"India"},
+  {id:"nri", text:"NRI"}
 ];

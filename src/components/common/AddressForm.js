@@ -44,7 +44,7 @@ export default class AddressForm extends Component {
                 onChange={e => this.onChangeHandle(e.target.value, "line2")}/>
           </Grid>
           <Grid item xs={3}>
-            <TextField className="width100percent" label="City" 
+            <TextField className="width100percent" label="City/Town" 
                 onChange={e => this.onChangeHandle(e.target.value, "city")}/>
           </Grid>
           <Grid item xs={3}>

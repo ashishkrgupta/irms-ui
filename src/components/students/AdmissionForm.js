@@ -29,7 +29,18 @@ import {
 import classes from "./AdmissionForm.module.css"
 import { IRMS_SERVICE } from "../../servers";
 import AddressForm from "../common/AddressForm";
-import {bloodGropupOptions, religionOptions, genderOptions, communityOptions, languageOptions } from '../common/OptionConfig'
+import {bloodGropupOptions, religionOptions, genderOptions, communityOptions, languageOptions, nationalityOptions } from '../common/OptionConfig'
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 export default class AdmissionForm extends Component {
   constructor(props) {
@@ -51,7 +62,7 @@ export default class AdmissionForm extends Component {
         ],
         bloodGroup: "",
         community: "",
-        dateOfBirth: "",
+        dateOfBirth: new Date(),
         documents: [
           {
             documentType: "",
@@ -61,15 +72,20 @@ export default class AdmissionForm extends Component {
         emailId: "",
         emergencyContacts: [
           {
-            contactNumber: "string",
-            personName: "string",
-            relationWithStudent: "string"
+            contactNumber: "",
+            personName: "",
+            relationWithStudent: ""
+          },
+          {
+            contactNumber: "",
+            personName: "",
+            relationWithStudent: ""
           }
         ],
         enrollmentId: "",
         firstName: "",
         gender: "",
-        languageKnown: [""],
+        languageKnown: [],
         lastName: "",
         middleName: "",
         nationality: "",
@@ -147,7 +163,7 @@ export default class AdmissionForm extends Component {
 
   onDOBChange = (date, dateStr) => {
     let student = {...this.state.student};
-    student.dateOfBirth = Moment(date).format('d/MM/YYYY');
+    student.dateOfBirth = date;//Moment(date).format('dd/MM/yyyy');
     this.setState({student});
   }
 
@@ -252,19 +268,28 @@ export default class AdmissionForm extends Component {
                           <KeyboardDatePicker
                             className="width100percent"
                             disableFuture
-                            margin="normal"
+                            autoOk
+                            variant="inline"
                             label="Date of Birth"
                             format="dd/MM/yyyy"
-                            openTo="date"
                             views={["year", "month", "date"]}
-                            inputValue={this.state.student.dateOfBirth }
+                            value={this.state.student.dateOfBirth }
                             onChange={this.onDOBChange}
                           />
                           </MuiPickersUtilsProvider>
                       </Grid>
                       <Grid item xs={4}>
-                        <TextField className="width100percent" label="Nationality" 
-                          inputProps={{ onChange:this.onFormInputChange, field: "nationality"}}/>
+                        <FormControl className={ "width100percent " + classes.formControl}>
+                          <InputLabel id="nationality-select-label">Nationality</InputLabel>
+                          <Select
+                            labelId="nationality-select-label"
+                            id="nationality-select"
+                            value={this.state.student.nationality}
+                            onChange={this.onFormInputChange}
+                          >
+                            {nationalityOptions.map(option => <MenuItem key={option.id} value={option.id} field="nationality">{option.text}</MenuItem>)}
+                          </Select>
+                        </FormControl>
                       </Grid>
                       <Grid item xs={4}>
                         <FormControl className={ "width100percent " }>
@@ -296,9 +321,33 @@ export default class AdmissionForm extends Component {
                           inputProps={{ onChange:this.onFormInputChange, field: "aadharNumber"}}/>
                       </Grid>
                       <Grid item xs={8}>
-                        <TextField className="width100percent" label="Language Known" 
-                          value={ this.state.student.languageKnown}
-                          inputProps={{ onChange:this.onFormInputChange, field: "languageKnown"}}/>
+
+                        <FormControl className={ "width100percent " }>
+                          <InputLabel id="language-label">Language Known</InputLabel>
+                          <Select
+                            labelId="language-label"
+                            multiple
+                            value={this.state.student.languageKnown}
+                            onChange={e => {
+                              let student = {...this.state.student};
+                              student.languageKnown = e.target.value;
+                              this.setState({student})
+                            }}
+                            input={<Input />}
+                            renderValue={selected => (
+                              <div className={classes.chips}>
+                                {selected.map(value => (
+                                  <Chip key={value} label={value} className={classes.chip} />
+                                ))}
+                              </div>
+                            )}
+                            MenuProps={MenuProps}
+                          >
+                            {languageOptions.map(name => (
+                              <MenuItem key={name.id} value={name.id}> {name.text} </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
                       </Grid>
                     </Grid>
                     </Grid>

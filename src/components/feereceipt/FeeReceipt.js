@@ -33,9 +33,12 @@ export default class FeeReceipt extends Component {
           <CardContent>
             <Typography style={{textAlign:"center", fontSize:"24px"}}>GURUKUL SHIKSHAN SANSTHAN</Typography>
             <Typography style={{textAlign:"center"}}>(Robertsganj, Mirzapur, UP. ESTD: 2020)</Typography>
-            <Typography>Name</Typography><Typography>Ashish</Typography>
+            <Typography>Student Name</Typography><Typography>Ashish</Typography>
             <Typography>Class</Typography><Typography>Class 2</Typography>
-            <Typography>Date</Typography><Typography>{new Date() + ""}</Typography>
+            <Typography>Date of Payment</Typography><Typography>{new Date() + ""}</Typography>
+            <Typography>Payment Mode</Typography><Typography>{new Date() + ""}</Typography>
+            <Typography>Term</Typography><Typography>{new Date() + ""}</Typography>
+            <Typography>Total Amount</Typography><Typography>{new Date() + ""}</Typography>
           </CardContent>
         </Card>
       </CardContent>
