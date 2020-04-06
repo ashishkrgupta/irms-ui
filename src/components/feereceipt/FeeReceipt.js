@@ -108,7 +108,7 @@ export default class FeeReceipt extends Component {
               </Grid>
               <Grid item xs={4}></Grid>
               {/* row */}
-              <Grid item xs={4}>
+              <Grid item xs={4} className="no-print">
                 <Autocomplete className="width100percent"
                   options={this.state.particulars}
                   style={{ width: "100%" }}
@@ -117,7 +117,7 @@ export default class FeeReceipt extends Component {
                   renderInput={params => <TextField style={{ width: "100%" }} {...params} label="Particular" />}
                 />
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={2} className="no-print">
                 { (this.state.currentParticular === "Tution Fee" || this.state.currentParticular === "Transport Fee") && <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <DatePicker
                     label="From"
@@ -132,7 +132,7 @@ export default class FeeReceipt extends Component {
                   />
                 </MuiPickersUtilsProvider>}
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={2} className="no-print">
                 { (this.state.currentParticular === "Tution Fee" || this.state.currentParticular === "Transport Fee") && <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <DatePicker
                     label="To"
@@ -147,11 +147,11 @@ export default class FeeReceipt extends Component {
                   />
                 </MuiPickersUtilsProvider>}
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={2} className="no-print">
                 <TextField className="width100percent" label="Price" 
                   onChange={e => {this.setState({currentPrice: parseFloat(e.target.value)})}}/>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={2} className="no-print">
                 <Button className="width100percent" variant="contained" onClick={this.addItem} color="primary">Add</Button>
               </Grid>
               {/* row */}
@@ -172,7 +172,7 @@ export default class FeeReceipt extends Component {
                           <TableCell align="center">{index + 1}</TableCell>
                           <TableCell align="left">{item.description}</TableCell>
                           <TableCell align="center">{item.price}</TableCell>
-                          <TableCell align="center"><DeleteIcon onClick={ () =>
+                          <TableCell align="center"><DeleteIcon className="no-print" onClick={ () =>
                             {
                               let invoice = {...this.state.invoice};
                               invoice.items.splice(index, 1);

@@ -12,6 +12,13 @@ code {
     monospace;
 }
 
+@media print { 
+  .no-print { 
+     visibility: hidden; 
+     display: none;
+  } 
+} 
+
 ::-webkit-scrollbar {
   width: 5px;
   }
