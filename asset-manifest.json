@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/irms-ui/static/css/main.3e0cb0c6.chunk.css",
-    "main.js": "/irms-ui/static/js/main.8eeb4532.chunk.js",
-    "main.js.map": "/irms-ui/static/js/main.8eeb4532.chunk.js.map",
+    "main.js": "/irms-ui/static/js/main.138f03d5.chunk.js",
+    "main.js.map": "/irms-ui/static/js/main.138f03d5.chunk.js.map",
     "runtime-main.js": "/irms-ui/static/js/runtime-main.b8791d0e.js",
     "runtime-main.js.map": "/irms-ui/static/js/runtime-main.b8791d0e.js.map",
     "static/js/2.19f45327.chunk.js": "/irms-ui/static/js/2.19f45327.chunk.js",
     "static/js/2.19f45327.chunk.js.map": "/irms-ui/static/js/2.19f45327.chunk.js.map",
     "index.html": "/irms-ui/index.html",
-    "precache-manifest.e2687a268108f245a5ad2dcaac87d880.js": "/irms-ui/precache-manifest.e2687a268108f245a5ad2dcaac87d880.js",
+    "precache-manifest.eaa01e4d653dd2d5cf0b1f54059ce800.js": "/irms-ui/precache-manifest.eaa01e4d653dd2d5cf0b1f54059ce800.js",
     "service-worker.js": "/irms-ui/service-worker.js",
     "static/css/main.3e0cb0c6.chunk.css.map": "/irms-ui/static/css/main.3e0cb0c6.chunk.css.map",
     "static/js/2.19f45327.chunk.js.LICENSE": "/irms-ui/static/js/2.19f45327.chunk.js.LICENSE",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.b8791d0e.js",
     "static/js/2.19f45327.chunk.js",
     "static/css/main.3e0cb0c6.chunk.css",
-    "static/js/main.8eeb4532.chunk.js"
+    "static/js/main.138f03d5.chunk.js"
   ]
 }
