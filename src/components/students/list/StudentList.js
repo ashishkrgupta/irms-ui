@@ -73,8 +73,9 @@ export default class StudentList extends Component {
   componentDidMount = () => {
     IRMS_SERVICE.get("/students").then(
       resp => {
-        console.log(resp.data);
-        this.setState({allStudents: resp.data, students: resp.data})
+        console.log(resp);
+        let data = resp.data ? resp.data.body ? resp.data.body : [] : [];
+        this.setState({allStudents: data, students: data})
       }, 
       error => {
         console.log(error);

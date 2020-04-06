@@ -88,7 +88,7 @@ export default class FeeReceipt extends Component {
               <Grid item xs={4}>
                 <Typography>Payment Date</Typography>
               </Grid>
-              <Grid item xs={8}>
+              <Grid item xs={4}>
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <KeyboardDatePicker
                     className="width100percent"
@@ -106,6 +106,7 @@ export default class FeeReceipt extends Component {
                   />
                   </MuiPickersUtilsProvider>
               </Grid>
+              <Grid item xs={4}></Grid>
               {/* row */}
               <Grid item xs={4}>
                 <Autocomplete className="width100percent"
@@ -117,9 +118,8 @@ export default class FeeReceipt extends Component {
                 />
               </Grid>
               <Grid item xs={2}>
-                { this.state.currentParticular === "Tution Fee" && <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                { (this.state.currentParticular === "Tution Fee" || this.state.currentParticular === "Transport Fee") && <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <DatePicker
-                    //style={{width:"50%"}}
                     label="From"
                     autoOk
                     variant="inline"
@@ -133,9 +133,8 @@ export default class FeeReceipt extends Component {
                 </MuiPickersUtilsProvider>}
               </Grid>
               <Grid item xs={2}>
-                { this.state.currentParticular === "Tution Fee" && <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                { (this.state.currentParticular === "Tution Fee" || this.state.currentParticular === "Transport Fee") && <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <DatePicker
-                    //style={{width:"50%"}}
                     label="To"
                     autoOk
                     variant="inline"
@@ -148,8 +147,6 @@ export default class FeeReceipt extends Component {
                   />
                 </MuiPickersUtilsProvider>}
               </Grid>
-                
-                  
               <Grid item xs={2}>
                 <TextField className="width100percent" label="Price" 
                   onChange={e => {this.setState({currentPrice: parseFloat(e.target.value)})}}/>

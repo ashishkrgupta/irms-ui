@@ -46,6 +46,7 @@ export default class AdmissionForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isEdit: false,
       student: {
         aadharNumber: "",
         addmissionStandard: "",
@@ -178,9 +179,23 @@ export default class AdmissionForm extends Component {
     student.emergencyContacts[event.target.attributes.index.value][event.target.attributes.field.value] = event.target.value;
     this.setState({student});
   }
+
+  onFileSelect = (event, index) => {
+    let student = {...this.state.student};
+    let doc = student.documents[index];
+    doc.file = event.target.files[0];
+    student.documents[index] = doc;
+    this.setState({student});
+  }
   
   saveData = async () => {
-    IRMS_SERVICE.post("/students", JSON.stringify(this.state.student)).then(
+    //let data = new FormData();
+    let student = {...this.state.student};
+    student.languageKnown = student.languageKnown.join(",");
+    //let files = this.state.student.documents.map(doc => {return doc.file});
+    //data.append("json", JSON.stringify(student));
+    //data.append("files", files);
+    IRMS_SERVICE.post("/students", JSON.stringify(student)).then(
       resp => {
           console.log(resp)
       },
@@ -199,8 +214,10 @@ export default class AdmissionForm extends Component {
       IRMS_SERVICE.get("/students/" + stdId).then(response => {
         console.log(response);
         if(response) {
-          response.data.dateOfBirth = Moment(response.data.dateOfBirth).format('d/MM/YYYY');
-          this.setState({student: response.data});
+          //response.data.dateOfBirth = Moment(response.data.dateOfBirth).format('d/MM/YYYY');
+          let student = {...response.data.body};
+          student.languageKnown = student.languageKnown.split(",");
+          this.setState({student, isEdit: true});
         }
       });
     }
@@ -211,7 +228,8 @@ export default class AdmissionForm extends Component {
     return (<Card>
               <CardHeader
                 style={{textAlign:"center", height:"25px"}}
-                title = "New Admission" 
+                title = {this.state.isEdit ? this.state.student.firstName + " " + this.state.student.middleName + " " + this.state.student.lastName
+                           : "New Admission" }
                 titleTypographyProps = {{variant: "h5"}}
                 />
               <CardContent>
@@ -367,18 +385,18 @@ export default class AdmissionForm extends Component {
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="First Name" 
-                          value={ this.state.student.relatives[0].firstName}
+                          value={ this.state.student.relatives && this.state.student.relatives[0] ? this.state.student.relatives[0].firstName : ""}
                           onChange={ e => this.updateRelativeDetails(e.target.value, 0, 'firstName') }
                           />
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="Middle Name" 
-                          value={ this.state.student.relatives[0].middleName}
+                          value={ this.state.student.relatives && this.state.student.relatives[0] ? this.state.student.relatives[0].middleName : ""}
                           onChange={ e => this.updateRelativeDetails(e.target.value, 0, 'middleName') }/>
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="Last Name" 
-                          value={ this.state.student.relatives[0].lastName}
+                          value={ this.state.student.relatives && this.state.student.relatives[0] ? this.state.student.relatives[0].lastName : ""}
                           onChange={ e => this.updateRelativeDetails(e.target.value, 0, 'lastName') }/>
                     </Grid>
                     <Grid item xs={2}>
@@ -386,17 +404,17 @@ export default class AdmissionForm extends Component {
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="First Name" 
-                          value={ this.state.student.relatives[1].firstName}
+                          value={ this.state.student.relatives && this.state.student.relatives[1] ? this.state.student.relatives[1].firstName : ""}
                           onChange={ e => this.updateRelativeDetails(e.target.value, 1, 'firstName') }/>
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="Middle Name" 
-                          value={ this.state.student.relatives[1].middleName}
+                          value={ this.state.student.relatives && this.state.student.relatives[1] ? this.state.student.relatives[1].middleName : ""}
                           onChange={ e => this.updateRelativeDetails(e.target.value, 1, 'middleName') }/>
                     </Grid>
                     <Grid item xs={3}>
                       <TextField className="width100percent" label="Last Name" 
-                          value={ this.state.student.relatives[1].lastName}
+                          value={ this.state.student.relatives && this.state.student.relatives[1] ? this.state.student.relatives[1].lastName : ""}
                           onChange={ e => this.updateRelativeDetails(e.target.value, 1, 'lastName') }/>
                     </Grid>
                     <Grid item xs={3}>
@@ -423,7 +441,7 @@ export default class AdmissionForm extends Component {
                   <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Emergency Contact</Typography>
                   <Divider className={classes.width25percent}/>
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    {this.state.student.emergencyContacts.map((contact, i) => {
+                    { this.state.student.emergencyContacts && this.state.student.emergencyContacts.map((contact, i) => {
                       return [<Grid item xs={4} key={"0" + i}>
                         <TextField className="width100percent" inputProps={{ onChange:this.updateEmergencyContact, index:i, field: "contactNumber"}} label="Contact Number" />
                       </Grid>,
@@ -438,7 +456,7 @@ export default class AdmissionForm extends Component {
                   <Typography variant="h5" component="h2"  className="margintop20px" style={{color: "#3f51b5"}}>C. Enclosure  </Typography>
                   <Divider />
                   <Grid container direction="row" justify="flex-start" spacing={1} alignItems="center">
-                    { this.state.student.documents.map((doc, index) => {
+                    { this.state.student.documents &&  this.state.student.documents.map((doc, index) => {
                         return[<Grid item xs={1} key = {"doc_ctrl_" + index} style={{paddingTop: "14px"}} >
                           {index === 0 && <AddCircleIcon style={{ fontSize: 35, cursor: "pointer"  }} onClick={this.addDocumentRow}/>}
                           <RemoveCircleIcon style={{ fontSize: 35, cursor: "pointer", float:"right" }} onClick={ () => this.removeDocumentRow(index)}/>
@@ -460,7 +478,7 @@ export default class AdmissionForm extends Component {
                           </FormControl>
                       </Grid>,
                       <Grid item xs={4} key = {"doc_file_" + index}>
-                        <InputBase type="file" inputProps={{ 'aria-label': 'naked' }}/>
+                        <InputBase type="file" inputProps={{ 'aria-label': 'naked' }} onChange={e => this.onFileSelect(e, index)}/>
                       </Grid>];
                     } )}
                     

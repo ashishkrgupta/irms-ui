@@ -42,7 +42,7 @@ export default class AdmissionForm extends Component {
     IRMS_SERVICE.get("/students/" + studentId).then(response => {
       console.log(response);
       if(response) {
-        this.setState({student: response.data});
+        this.setState({student: response.data.body});
       }
       
     });
@@ -53,13 +53,13 @@ export default class AdmissionForm extends Component {
   }
 
   render() {
-    let father = this.state.student.relatives ? this.state.student.relatives.find(rel => { return rel.relation === 'father'; } ) : null;
-    let mother = this.state.student.relatives ? this.state.student.relatives.find(rel => { return rel.relation === 'mother'; } ) : null;
+    let father = this.state.student && this.state.student.relatives ? this.state.student.relatives.find(rel => { return rel.relation === 'father'; } ) : null;
+    let mother = this.state.student && this.state.student.relatives ? this.state.student.relatives.find(rel => { return rel.relation === 'mother'; } ) : null;
 
-    let resAddr = this.state.student.addressList ? this.state.student.addressList.find(addr => { return addr.addressType === 'resAddress'; } ) : null;
-    let corAddr = this.state.student.addressList ? this.state.student.addressList.find(addr => { return addr.addressType === 'corAddress'; } ) : null;
+    let resAddr = this.state.student && this.state.student.addressList ? this.state.student.addressList.find(addr => { return addr.addressType === 'resAddress'; } ) : null;
+    let corAddr = this.state.student && this.state.student.addressList ? this.state.student.addressList.find(addr => { return addr.addressType === 'corAddress'; } ) : null;
 
-    return (<Card>
+    return (this.state.student && <Card>
               <CardHeader
                 style={{textAlign:"center", height:"25px", color: "#3f51b5"}}
                 title = {this.state.student.firstName + " " + this.state.student.middleName + " " + this.state.student.lastName}
@@ -158,7 +158,7 @@ export default class AdmissionForm extends Component {
                       <LabelBox label="Phone Number" value={this.state.student.phoneNumber}/>
                     </Grid>
                     <Grid item xs={5}>
-                      <LabelBox label="Email" value={this.state.student.email}/>
+                      <LabelBox label="Email" value={this.state.student.emailId}/>
                     </Grid>
                   </Grid>
                   <Typography className={"margintop20px " } style={{color: "#3f51b5"}}>Residential Address</Typography>
