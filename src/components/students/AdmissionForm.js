@@ -18,7 +18,8 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import Chip from '@material-ui/core/Chip';
 import Input from '@material-ui/core/Input';
-import Moment from 'moment';
+import Snackbar from '@material-ui/core/Snackbar';
+import Alert from '@material-ui/lab/Alert';
 
 import 'date-fns';
 import DateFnsUtils from '@date-io/date-fns';
@@ -30,6 +31,7 @@ import classes from "./AdmissionForm.module.css"
 import { IRMS_SERVICE } from "../../servers";
 import AddressForm from "../common/AddressForm";
 import {bloodGropupOptions, religionOptions, genderOptions, communityOptions, languageOptions, nationalityOptions } from '../common/OptionConfig'
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -47,6 +49,7 @@ export default class AdmissionForm extends Component {
     super(props);
     this.state = {
       isEdit: false,
+      openStatus: false,
       student: {
         aadharNumber: "",
         addmissionStandard: "",
@@ -198,9 +201,13 @@ export default class AdmissionForm extends Component {
     IRMS_SERVICE.post("/students", JSON.stringify(student)).then(
       resp => {
           console.log(resp)
+          let student = {...resp.data.body};
+          student.languageKnown = student.languageKnown.split(",");
+          this.setState({student, studentCreated: true, openStatus: true, message: "Student data saved successfully."});
+
       },
       error => {
-
+        this.setState({studentCreated: false, openStatus: true, message: "Error while creating Student."});
       }
     );
    }
@@ -484,6 +491,25 @@ export default class AdmissionForm extends Component {
                     
                   </Grid>
                 </form>
+                <Snackbar
+                  style={{zIndex:99999, top:"100px"}}
+                  anchorOrigin={{ vertical:"top", horizontal:"center" }}
+                  open={this.state.openStatus}
+                  autoHideDuration={6000}
+                  onClose={e => { 
+                    this.setState({message:"", openStatus:false});
+                    this.props.history.push("/student-detail/" + this.state.student.id);
+                  } }
+                  message={this.state.message}
+                >
+                  <Alert 
+                    severity={this.state.studentCreated ? "success" : "error"}
+                    elevation={6} 
+                    variant="filled"
+                  > 
+                    {this.state.message}
+                  </Alert>
+                </Snackbar>
               </CardContent>
               <CardActions>
                 <Button variant="contained" onClick={this.saveData} color="primary">Save</Button>

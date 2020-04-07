@@ -5,13 +5,14 @@ import Header from '../components/header/Header';
 import Sidenav from '../components/sidenav/Sidenav';
 import AdmissionForm from '../components/students/AdmissionForm'
 import FeeReceipt from '../components/feereceipt/FeeReceipt';
-import LinearProgress from '@material-ui/core/LinearProgress';
 import Dashboard from '../components/dashboard/Dashboard'
 import StudentList from '../components/students/list/StudentList'
 import StudentDetails from "../components/students/details/StudentDetails"
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import BookIssue from '../components/library/issue/BookIssue';
 import BookReturn from '../components/library/return/BookReturn';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import {IRMS_SERVICE} from '../servers'
 
 export default class App extends Component {
@@ -68,7 +69,12 @@ export default class App extends Component {
           </Container>
         </div>
         
-        <div style={{display: this.state.loader, minHeight: "800px", background: "#33333340", position: "relative", zIndex: 9999}}><LinearProgress style={{zIndex: "9999"}}/></div>
+        <div style={{display: this.state.loader, minHeight: "800px", background: "#33333340", position: "relative", zIndex: 9999}}>
+    {/*<LinearProgress style={{zIndex: "9999"}}/>*/}
+          <Backdrop open={this.state.loader} style={{zIndex: "9999"}} onClick={e=> { this.setState({isLoading: false}) }}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        </div>
       </BrowserRouter>
       );
     }
