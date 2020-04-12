@@ -187,32 +187,38 @@ export default class AdmissionForm extends Component {
     let student = {...this.state.student};
     let doc = student.documents[index];
     doc.file = event.target.files[0];
+    doc.fileName = doc.file.name;
+    doc.documentType = doc.file.type;
     student.documents[index] = doc;
     this.setState({student});
   }
   
   saveData = async () => {
-    //let data = new FormData();
+    let data = new FormData();
     let student = {...this.state.student};
     student.languageKnown = student.languageKnown.join(",");
-    //let files = this.state.student.documents.map(doc => {return doc.file});
-    //data.append("json", JSON.stringify(student));
-    //data.append("files", files);
-    IRMS_SERVICE.post("/students", JSON.stringify(student)).then(
+    this.state.student.documents.forEach((doc, index) => {
+      data.append(`files`, doc.file);
+      //delete doc.file;
+    });
+    
+    data.append("studentStr", JSON.stringify(student));
+    IRMS_SERVICE.post("/students", data, { headers : {"content-type":"multipart/form-data"}}).then(
       resp => {
+        if (resp.status === 200 ) {
           console.log(resp)
-          let student = {...resp.data.body};
-          student.languageKnown = student.languageKnown.split(",");
+          let student = resp.data ? {...resp.data.body} : {};
+          student.languageKnown = student.languageKnown ? student.languageKnown.split(",") : [];
           this.setState({student, studentCreated: true, openStatus: true, message: "Student data saved successfully."});
-
+        } else {
+          this.setState({openStatus: true, message: "Error while saving Student data. " + resp.message})
+        }
       },
       error => {
         this.setState({studentCreated: false, openStatus: true, message: "Error while creating Student."});
       }
     );
    }
-
-
 
   componentDidMount = () => {
     console.log(this.props);
@@ -228,7 +234,6 @@ export default class AdmissionForm extends Component {
         }
       });
     }
-    //console.log(this.state.student);
   }
 
   render() {
@@ -495,10 +500,10 @@ export default class AdmissionForm extends Component {
                   style={{zIndex:99999, top:"100px"}}
                   anchorOrigin={{ vertical:"top", horizontal:"center" }}
                   open={this.state.openStatus}
-                  autoHideDuration={6000}
+                  autoHideDuration={3000}
                   onClose={e => { 
                     this.setState({message:"", openStatus:false});
-                    this.props.history.push("/student-detail/" + this.state.student.id);
+                    //this.props.history.push("/student-detail/" + this.state.student.id);
                   } }
                   message={this.state.message}
                 >

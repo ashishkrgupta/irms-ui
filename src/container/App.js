@@ -71,7 +71,7 @@ export default class App extends Component {
         
         <div style={{display: this.state.loader, minHeight: "800px", background: "#33333340", position: "relative", zIndex: 9999}}>
     {/*<LinearProgress style={{zIndex: "9999"}}/>*/}
-          <Backdrop open={this.state.loader} style={{zIndex: "9999"}} onClick={e=> { this.setState({isLoading: false}) }}>
+          <Backdrop open={this.state.loader !== "none"} style={{zIndex: "9999"}} onClick={e=> { this.setState({isLoading: false}) }}>
             <CircularProgress color="inherit" />
           </Backdrop>
         </div>

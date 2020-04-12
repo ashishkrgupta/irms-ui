@@ -229,7 +229,7 @@ export default class AdmissionForm extends Component {
                           <LabelBox label="Document Type" value={ doc.documentType }/>
                       </Grid>,
                       <Grid item xs={4} key = {"doc_file_" + index}>
-                        <IconButton onClick={()=> this.setState({docDialogImgSource:"", docDialogOpen:true, docDialogTitle:"test"})}>
+                        <IconButton onClick={()=> this.setState({docDialogImgSource:"", docDialogOpen:true, docDialogTitle:doc.documentType, docContent:doc.fileData })}>
                           <VisibilityIcon/>
                         </IconButton>
                         <IconButton>
@@ -247,10 +247,19 @@ export default class AdmissionForm extends Component {
                 onClose={this.handleDialogClose}
                 aria-labelledby="alert-dialog-slide-title"
                 aria-describedby="alert-dialog-slide-description"
+                fullWidth={true}
+                maxWidth={"md"}
+                height={"90%"}
               >
                 <DialogTitle id="alert-dialog-slide-title">{this.state.docDialogTitle}</DialogTitle>
                 <DialogContent>
-                  
+                  { this.state.docContent && <div>
+                      <object 
+                      style={{width: '100%', height: '400pt'}} 
+                      type="application/pdf" 
+                      data={'data:application/pdf;base64,' + this.state.docContent}></object>
+                      </div> 
+                  }
                 </DialogContent>
               </Dialog>
             </Card>);
